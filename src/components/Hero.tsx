@@ -1,11 +1,12 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, CirclePlay } from "lucide-react";
-import heroImage from "../assets/hero-nepal.png";
+import heroImage from "../assets/hero-nepal.jpg";
 import MountainSignature from "./MountainSignature";
 import { heroStats } from "../data/content";
 
 export default function Hero() {
   const { scrollY } = useScroll();
+  const reduceMotion = useReducedMotion();
   const imageY = useTransform(scrollY, [0, 700], [0, 90]);
   const copyY = useTransform(scrollY, [0, 700], [0, -38]);
 
@@ -15,14 +16,16 @@ export default function Hero() {
         className="hero-image"
         src={heroImage}
         alt="A health worker walking through a Nepali hillside village at sunrise."
-        style={{ y: imageY }}
+        loading="eager"
+        decoding="async"
+        style={{ y: reduceMotion ? 0 : imageY }}
       />
       <div className="hero-scrim" />
       <MountainSignature className="hero-mountain-signature" />
 
       <motion.div
         className="hero-copy"
-        style={{ y: copyY }}
+        style={{ y: reduceMotion ? 0 : copyY }}
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}

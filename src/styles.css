@@ -1,7 +1,7 @@
 :root {
   color-scheme: light;
   font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Gotham", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   background: #f6f7f4;
   color: #17211f;
@@ -24,6 +24,44 @@
   --muted: #5d6b67;
   --line: rgba(23, 33, 31, 0.13);
   --shadow: 0 24px 60px rgba(74, 23, 25, 0.16);
+  --font-sans:
+    "Gotham", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-display:
+    "Gotham", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+@font-face {
+  font-family: "Gotham";
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+  src: url("./assets/fonts/gotham-extralight.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Gotham";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./assets/fonts/gotham-book.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Gotham";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("./assets/fonts/gotham-medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Gotham";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("./assets/fonts/gotham-bold.woff2") format("woff2");
 }
 
 * {
@@ -31,18 +69,21 @@
 }
 
 html {
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
   background:
     linear-gradient(180deg, rgba(246, 247, 244, 0) 0%, #f6f7f4 66%),
     radial-gradient(circle at 86% 9%, rgba(201, 53, 53, 0.12), transparent 24%),
     radial-gradient(circle at 12% 18%, rgba(236, 167, 44, 0.14), transparent 25%),
     #f6f7f4;
   color: var(--ink);
+  font-family: var(--font-sans);
 }
 
 body,
@@ -115,6 +156,7 @@ button {
 
 .brand strong {
   font-size: 0.98rem;
+  font-weight: 600;
   line-height: 1.05;
 }
 
@@ -182,7 +224,7 @@ button {
 
 .button {
   padding: 0 20px;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .button:hover,
@@ -279,6 +321,7 @@ button {
   color: var(--red);
   font-weight: 900;
   font-size: 0.78rem;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
@@ -288,9 +331,10 @@ button {
 
 .hero h1 {
   margin: 0;
-  font-size: 5rem;
-  line-height: 0.95;
-  font-weight: 950;
+  font-family: var(--font-display);
+  font-size: 5.45rem;
+  line-height: 0.98;
+  font-weight: 100;
 }
 
 .hero-lede {
@@ -380,11 +424,14 @@ button {
 
 .section-heading h2,
 .giving-copy h2,
+.fundraising-copy h2,
 .story-panel h2 {
   margin: 0;
   color: var(--pine);
-  font-size: 3rem;
-  line-height: 1.03;
+  font-family: var(--font-display);
+  font-size: 3.85rem;
+  line-height: 1.02;
+  font-weight: 100;
 }
 
 .section-heading p,
@@ -517,6 +564,7 @@ button {
   margin: 0;
   color: var(--pine);
   font-size: 1.34rem;
+  font-weight: 600;
   line-height: 1.18;
 }
 
@@ -626,10 +674,7 @@ button {
 
 .fundraising-copy h2 {
   max-width: 600px;
-  margin: 0;
   color: var(--white);
-  font-size: 3rem;
-  line-height: 1.03;
 }
 
 .fundraising-copy p {
@@ -726,6 +771,7 @@ button {
   margin-top: 5px;
   color: var(--water-light);
   font-size: 3.05rem;
+  font-weight: 100;
   line-height: 0.9;
 }
 
@@ -854,8 +900,32 @@ button {
 .remaining-chip span {
   color: var(--water-light);
   font-size: 1.32rem;
-  font-weight: 950;
+  font-weight: 700;
   line-height: 1.1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+
+  .button:hover,
+  .header-donate:hover,
+  .menu-button:hover,
+  .impact-card:hover,
+  .partner-card:hover,
+  .impact-card:hover .impact-photo img {
+    transform: none;
+  }
 }
 
 .remaining-chip small {
@@ -1001,11 +1071,16 @@ button {
 
 @media (max-width: 880px) {
   .site-header {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr auto auto;
+  }
+
+  .brand {
+    grid-column: 1;
   }
 
   .nav {
     position: absolute;
+    grid-column: 1 / -1;
     top: calc(100% + 8px);
     right: 0;
     left: 0;
@@ -1026,10 +1101,12 @@ button {
   }
 
   .header-donate {
+    grid-column: 3;
     justify-self: end;
   }
 
   .menu-button {
+    grid-column: 4;
     display: inline-flex;
   }
 
@@ -1168,6 +1245,7 @@ button {
   .hero-stat {
     min-height: 76px;
     padding: 14px;
+    background: rgba(68, 18, 20, 0.76);
   }
 
   .hero-stat strong {
