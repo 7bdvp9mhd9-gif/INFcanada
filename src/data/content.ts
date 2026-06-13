@@ -13,6 +13,14 @@ export type GivingStep = {
   body: string;
 };
 
+export type FundraisingProgress = {
+  goal: number;
+  raised: number;
+  isExample: boolean;
+  title: string;
+  body: string;
+};
+
 export type Partner = {
   name: string;
   location: string;
@@ -68,20 +76,28 @@ export const givingSteps: GivingStep[] = [
   },
 ];
 
+export const fundraisingProgress: FundraisingProgress = {
+  goal: 100000,
+  raised: 68400,
+  isExample: true,
+  title: "Climbing toward the first INF Canada goal",
+  body: "Every gift moves practical care, rehabilitation, and community resilience closer to people in Nepal who are waiting for support.",
+};
+
 export const partners: Partner[] = [
   {
-    name: "INF Nepal",
-    location: "Pokhara and western Nepal",
-    focus: "Healthcare, hospitals, disability inclusion, and community development.",
+    name: "Local leadership",
+    location: "Community-led priorities",
+    focus: "Support follows local knowledge, relationships, and long-term trust.",
   },
   {
-    name: "INF UK",
-    location: "United Kingdom",
-    focus: "Global INF family support, storytelling, fundraising, and partner mobilisation.",
+    name: "Transparent giving",
+    location: "Canadian supporters",
+    focus: "Clear updates help donors see how generosity becomes practical care.",
   },
   {
-    name: "INF Australia",
-    location: "Australia",
-    focus: "Community empowerment, health equity, climate resilience, and supporter engagement.",
+    name: "Shared mission",
+    location: "One INF family",
+    focus: "Health, inclusion, resilience, and dignity stay at the centre of the work.",
   },
 ];

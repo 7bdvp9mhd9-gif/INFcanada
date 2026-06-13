@@ -13,9 +13,14 @@
   --moss: #823334;
   --pine: #4a1719;
   --red: #c93535;
+  --red-deep: #8f2428;
+  --red-soft: #f7e3e1;
   --marigold: #eca72c;
   --teal: #b64b43;
   --blue: #345995;
+  --water-light: #dff8ff;
+  --water-mid: #65cfee;
+  --water-deep: #1f8fba;
   --muted: #5d6b67;
   --line: rgba(23, 33, 31, 0.13);
   --shadow: 0 24px 60px rgba(74, 23, 25, 0.16);
@@ -34,6 +39,7 @@ body {
   min-width: 320px;
   background:
     linear-gradient(180deg, rgba(246, 247, 244, 0) 0%, #f6f7f4 66%),
+    radial-gradient(circle at 86% 9%, rgba(201, 53, 53, 0.12), transparent 24%),
     radial-gradient(circle at 12% 18%, rgba(236, 167, 44, 0.14), transparent 25%),
     #f6f7f4;
   color: var(--ink);
@@ -90,22 +96,16 @@ button {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
 }
 
-.brand-mark {
-  display: grid;
-  width: 46px;
-  height: 46px;
-  place-items: center;
-  border: 2px solid rgba(255, 255, 255, 0.82);
-  border-left: 7px solid var(--red);
-  border-radius: 8px;
-  color: var(--white);
-  font-weight: 900;
-  font-size: 0.92rem;
-  line-height: 1;
+.brand-logo {
+  display: block;
+  width: 70px;
+  height: auto;
+  flex: 0 0 auto;
+  object-fit: contain;
 }
 
 .brand strong,
@@ -121,7 +121,8 @@ button {
 .brand small {
   margin-top: 3px;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
+  line-height: 1.15;
 }
 
 .nav {
@@ -166,9 +167,10 @@ button {
 
 .header-donate {
   padding: 0 18px;
-  background: var(--white);
-  color: var(--pine);
+  background: var(--red);
+  color: var(--white);
   font-weight: 800;
+  box-shadow: 0 12px 26px rgba(201, 53, 53, 0.32);
 }
 
 .menu-button {
@@ -205,8 +207,9 @@ button {
 .button-dark {
   width: fit-content;
   margin-top: 28px;
-  background: var(--pine);
+  background: linear-gradient(135deg, var(--red), var(--red-deep));
   color: var(--white);
+  box-shadow: 0 16px 34px rgba(201, 53, 53, 0.26);
 }
 
 .button-footer {
@@ -242,9 +245,31 @@ button {
     linear-gradient(180deg, rgba(58, 14, 16, 0.22) 0%, rgba(58, 14, 16, 0.8) 100%);
 }
 
+.mountain-signature {
+  display: block;
+  max-width: none;
+  user-select: none;
+}
+
+.hero-mountain-signature {
+  position: absolute;
+  left: 50%;
+  bottom: -18px;
+  z-index: 0;
+  width: max(100%, 1180px);
+  height: clamp(170px, 13.25vw, 230px);
+  transform: translateX(-50%);
+  object-fit: cover;
+  object-position: center bottom;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
 .hero-copy {
+  position: relative;
+  z-index: 1;
   width: min(680px, calc(100% - 40px));
-  margin: auto auto 165px max(24px, calc((100vw - 1120px) / 2));
+  margin: auto auto 230px max(24px, calc((100vw - 1120px) / 2));
   color: var(--white);
 }
 
@@ -285,6 +310,7 @@ button {
 
 .hero-stats {
   position: absolute;
+  z-index: 1;
   right: max(20px, calc((100vw - 1120px) / 2));
   bottom: 34px;
   left: max(20px, calc((100vw - 1120px) / 2));
@@ -331,8 +357,21 @@ button {
 }
 
 .section-heading {
+  position: relative;
   max-width: 720px;
   margin-bottom: 42px;
+  padding-top: 18px;
+}
+
+.section-heading::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 76px;
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--red), var(--red-deep));
+  content: "";
 }
 
 .section-heading.compact {
@@ -358,6 +397,7 @@ button {
 
 .impact-section {
   background:
+    linear-gradient(90deg, rgba(201, 53, 53, 0.1), rgba(201, 53, 53, 0) 38%),
     linear-gradient(180deg, #f6f7f4 0%, #ffffff 100%);
 }
 
@@ -369,8 +409,6 @@ button {
 
 .impact-card,
 .partner-card {
-  min-height: 310px;
-  padding: 28px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--white);
@@ -381,6 +419,30 @@ button {
     border-color 200ms ease;
 }
 
+.impact-card {
+  position: relative;
+  display: flex;
+  min-height: 438px;
+  overflow: hidden;
+  flex-direction: column;
+  padding: 0;
+}
+
+.impact-card::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 2;
+  width: 5px;
+  background: linear-gradient(180deg, var(--red), rgba(201, 53, 53, 0));
+  content: "";
+  opacity: 0.92;
+}
+
+.partner-card {
+  min-height: 310px;
+  padding: 28px;
+}
+
 .impact-card:hover,
 .partner-card:hover {
   border-color: rgba(201, 53, 53, 0.38);
@@ -388,25 +450,65 @@ button {
   transform: translateY(-6px);
 }
 
+.impact-photo {
+  position: relative;
+  min-height: 194px;
+  overflow: hidden;
+  background: var(--pine);
+}
+
+.impact-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 194px;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+
+.impact-card:hover .impact-photo img {
+  transform: scale(1.045);
+}
+
+.impact-photo::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(74, 23, 25, 0) 40%, rgba(74, 23, 25, 0.66) 100%),
+    linear-gradient(90deg, rgba(201, 53, 53, 0.34), rgba(201, 53, 53, 0) 45%);
+  content: "";
+}
+
 .impact-icon {
+  position: absolute;
+  bottom: 18px;
+  left: 22px;
+  z-index: 1;
   display: grid;
   width: 52px;
   height: 52px;
-  margin-bottom: 36px;
   place-items: center;
   border-radius: 8px;
-  background: #f7e3e1;
-  color: var(--teal);
+  background: var(--red);
+  color: var(--white);
+  box-shadow: 0 14px 28px rgba(74, 23, 25, 0.28);
 }
 
 .impact-card:nth-child(2) .impact-icon {
-  background: #fff2d5;
-  color: #a76a07;
+  background: var(--marigold);
+  color: var(--pine);
 }
 
 .impact-card:nth-child(3) .impact-icon {
   background: #e6ecfa;
   color: var(--blue);
+}
+
+.impact-card-body {
+  display: grid;
+  align-content: start;
+  flex: 1;
+  padding: 30px 28px 28px;
 }
 
 .impact-card h3,
@@ -427,7 +529,8 @@ button {
 
 .giving-section {
   background:
-    linear-gradient(135deg, rgba(74, 23, 25, 0.98), rgba(120, 37, 39, 0.94)),
+    linear-gradient(180deg, rgba(74, 23, 25, 0.96) 0%, rgba(108, 31, 34, 0.95) 52%, #4a1719 100%),
+    radial-gradient(circle at 88% 16%, rgba(201, 53, 53, 0.22), transparent 34%),
     #4a1719;
   color: var(--white);
 }
@@ -493,13 +596,293 @@ button {
   color: rgba(255, 255, 255, 0.58);
 }
 
+.fundraising-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(201, 53, 53, 0.35), transparent 26%),
+    linear-gradient(180deg, #4a1719 0%, #5e1d20 32%, #742326 60%, #f6f7f4 100%);
+  color: var(--white);
+}
+
+.fundraising-section::before {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 38px 38px;
+  content: "";
+  opacity: 0.32;
+}
+
+.fundraising-shell {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(520px, 1fr);
+  gap: 42px;
+  align-items: center;
+}
+
+.fundraising-copy h2 {
+  max-width: 600px;
+  margin: 0;
+  color: var(--white);
+  font-size: 3rem;
+  line-height: 1.03;
+}
+
+.fundraising-copy p {
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.fundraising-copy .eyebrow {
+  color: #ffd36d;
+}
+
+.fundraising-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  min-height: 42px;
+  margin-top: 12px;
+  padding: 0 15px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(48, 12, 14, 0.3);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.fundraising-note svg {
+  color: var(--water-light);
+  flex: 0 0 auto;
+}
+
+.fundraising-panel {
+  min-width: 0;
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.07)),
+    rgba(255, 255, 255, 0.09);
+  box-shadow: 0 28px 70px rgba(42, 8, 10, 0.24);
+  backdrop-filter: blur(14px);
+}
+
+.fundraising-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.fundraising-stat {
+  min-height: 96px;
+  padding: 18px;
+  background: rgba(48, 12, 14, 0.27);
+}
+
+.fundraising-stat span,
+.liquid-meter-header span {
+  display: block;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.fundraising-stat strong {
+  display: block;
+  margin-top: 9px;
+  color: var(--white);
+  font-size: 1.22rem;
+  line-height: 1.1;
+}
+
+.liquid-meter {
+  margin-top: 24px;
+}
+
+.liquid-meter-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.liquid-meter-header strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--water-light);
+  font-size: 3.05rem;
+  line-height: 0.9;
+}
+
+.liquid-meter-icons {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.liquid-meter-icons svg {
+  display: block;
+  width: 36px;
+  height: 36px;
+  padding: 9px;
+  border: 1px solid rgba(223, 248, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(101, 207, 238, 0.12);
+  color: var(--water-light);
+}
+
+.liquid-mountain-frame {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  border: 1px solid rgba(223, 248, 255, 0.2);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(223, 248, 255, 0.13), rgba(62, 14, 16, 0.18)),
+    rgba(255, 255, 255, 0.08);
+}
+
+.liquid-mountain-frame::before {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  content: "";
+  opacity: 0.56;
+}
+
+.liquid-mountain {
+  position: absolute;
+  right: -20px;
+  bottom: 4px;
+  left: -20px;
+  z-index: 1;
+  width: calc(100% + 40px);
+  height: auto;
+}
+
+.liquid-mountain-base {
+  fill: rgba(255, 255, 255, 0.1);
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-linejoin: round;
+  stroke-width: 2.6;
+}
+
+.liquid-deep {
+  opacity: 0.96;
+}
+
+.liquid-wave-set {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.liquid-foam {
+  fill: none;
+  stroke: #f1fcff;
+  stroke-linecap: round;
+  stroke-width: 8;
+  opacity: 0.82;
+}
+
+.liquid-foam-soft {
+  stroke: rgba(210, 246, 255, 0.58);
+  stroke-width: 4;
+}
+
+.liquid-bubble {
+  fill: rgba(223, 248, 255, 0.74);
+}
+
+.liquid-mountain-outline {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3.4;
+}
+
+.liquid-mountain-snow {
+  fill: rgba(255, 255, 255, 0.74);
+}
+
+.liquid-mountain-ridge {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.62);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.25;
+}
+
+.remaining-chip {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  z-index: 2;
+  max-width: min(230px, calc(100% - 44px));
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+  background: rgba(74, 23, 25, 0.78);
+  color: var(--white);
+  box-shadow: 0 16px 34px rgba(45, 9, 11, 0.26);
+  backdrop-filter: blur(14px);
+}
+
+.remaining-chip span,
+.remaining-chip small {
+  display: block;
+}
+
+.remaining-chip span {
+  color: var(--water-light);
+  font-size: 1.32rem;
+  font-weight: 950;
+  line-height: 1.1;
+}
+
+.remaining-chip small {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.78rem;
+  line-height: 1.25;
+}
+
 .story-band {
   position: relative;
   overflow: hidden;
   padding: 94px 20px;
   background:
-    linear-gradient(90deg, rgba(201, 53, 53, 0.11), rgba(236, 167, 44, 0.12)),
+    linear-gradient(90deg, rgba(201, 53, 53, 0.15), rgba(236, 167, 44, 0.12)),
     #ffffff;
+}
+
+.story-mountain-signature {
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: max(100%, 1100px);
+  transform: translateX(-50%);
+  opacity: 0.18;
+  filter: brightness(0) saturate(100%) invert(31%) sepia(13%) saturate(476%) hue-rotate(126deg) brightness(91%) contrast(86%);
+  pointer-events: none;
 }
 
 .story-band::before {
@@ -515,10 +898,49 @@ button {
 
 .story-inner {
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+  gap: 34px;
+  align-items: center;
+}
+
+.story-photo {
+  position: relative;
+  min-height: 420px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.story-photo::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-top: 7px solid var(--red);
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+
+.story-photo::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(74, 23, 25, 0) 48%, rgba(74, 23, 25, 0.32) 100%);
+  content: "";
+}
+
+.story-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
 }
 
 .story-panel {
-  width: min(820px, 100%);
+  width: 100%;
   padding: 42px;
   border-left: 7px solid var(--red);
   border-radius: 8px;
@@ -577,10 +999,6 @@ button {
   line-height: 1.6;
 }
 
-.footer-brand .brand-mark {
-  border-color: rgba(255, 255, 255, 0.72);
-}
-
 @media (max-width: 880px) {
   .site-header {
     grid-template-columns: auto 1fr auto;
@@ -623,6 +1041,14 @@ button {
     margin: auto 20px 230px;
   }
 
+  .hero-mountain-signature {
+    left: 54%;
+    width: 1120px;
+    height: 180px;
+    bottom: -12px;
+    opacity: 0.78;
+  }
+
   .hero h1 {
     font-size: 3.9rem;
   }
@@ -630,7 +1056,9 @@ button {
   .hero-stats,
   .impact-grid,
   .partner-grid,
-  .giving-layout {
+  .giving-layout,
+  .fundraising-shell,
+  .story-inner {
     grid-template-columns: 1fr;
   }
 
@@ -638,10 +1066,31 @@ button {
     gap: 32px;
   }
 
+  .story-inner {
+    gap: 24px;
+  }
+
+  .story-photo {
+    min-height: 360px;
+  }
+
+  .story-photo img {
+    min-height: 360px;
+  }
+
   .section-heading h2,
   .giving-copy h2,
+  .fundraising-copy h2,
   .story-panel h2 {
     font-size: 2.35rem;
+  }
+
+  .fundraising-panel {
+    padding: 24px;
+  }
+
+  .liquid-mountain-frame {
+    min-height: 360px;
   }
 }
 
@@ -652,10 +1101,8 @@ button {
     gap: 8px;
   }
 
-  .brand-mark {
-    width: 42px;
-    height: 42px;
-    font-size: 0.82rem;
+  .brand-logo {
+    width: 60px;
   }
 
   .brand strong {
@@ -737,6 +1184,7 @@ button {
 
   .section-heading h2,
   .giving-copy h2,
+  .fundraising-copy h2,
   .story-panel h2 {
     font-size: 2rem;
   }
@@ -745,6 +1193,31 @@ button {
   .partner-card,
   .story-panel {
     padding: 24px;
+  }
+
+  .impact-card {
+    min-height: auto;
+    padding: 0;
+  }
+
+  .impact-photo {
+    min-height: 176px;
+  }
+
+  .impact-photo img {
+    min-height: 176px;
+  }
+
+  .impact-card-body {
+    padding: 28px 24px 24px;
+  }
+
+  .story-photo {
+    min-height: 285px;
+  }
+
+  .story-photo img {
+    min-height: 285px;
   }
 
   .step-card {
@@ -758,6 +1231,63 @@ button {
   .step-card > span {
     width: 42px;
     height: 42px;
+  }
+
+  .fundraising-section {
+    padding-top: 66px;
+    padding-bottom: 76px;
+  }
+
+  .fundraising-shell {
+    gap: 30px;
+  }
+
+  .fundraising-note {
+    align-items: flex-start;
+    height: auto;
+    min-height: 42px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    border-radius: 8px;
+  }
+
+  .fundraising-panel {
+    padding: 18px;
+  }
+
+  .fundraising-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .fundraising-stat {
+    min-height: 78px;
+    padding: 15px;
+  }
+
+  .liquid-meter-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .liquid-meter-header strong {
+    font-size: 2.35rem;
+  }
+
+  .liquid-mountain-frame {
+    min-height: 265px;
+  }
+
+  .liquid-mountain {
+    right: -24%;
+    left: -24%;
+    bottom: 0;
+    width: 148%;
+  }
+
+  .remaining-chip {
+    top: 14px;
+    right: 14px;
+    max-width: calc(100% - 28px);
   }
 
   .footer {

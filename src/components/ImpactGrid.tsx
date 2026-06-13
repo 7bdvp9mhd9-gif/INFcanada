@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { CloudSun, HeartPulse, UsersRound } from "lucide-react";
+import healthPhoto from "../assets/photo-health-support.jpg";
+import communityPhoto from "../assets/photo-community-leadership.jpg";
+import resiliencePhoto from "../assets/photo-resilience-path.jpg";
 import { impactAreas, type IconMap } from "../data/content";
 
 const icons: IconMap = {
@@ -7,6 +10,21 @@ const icons: IconMap = {
   community: UsersRound,
   climate: CloudSun,
 };
+
+const impactPhotos = {
+  health: {
+    src: healthPhoto,
+    alt: "A Nepali health worker speaking with a community member in a hillside village.",
+  },
+  community: {
+    src: communityPhoto,
+    alt: "A local community group meeting together beside terraced hills in Nepal.",
+  },
+  climate: {
+    src: resiliencePhoto,
+    alt: "Community members walking a mountain path in Nepal with terraced hills behind them.",
+  },
+} satisfies Record<keyof typeof icons, { src: string; alt: string }>;
 
 export default function ImpactGrid() {
   return (
@@ -30,6 +48,7 @@ export default function ImpactGrid() {
         <div className="impact-grid">
           {impactAreas.map((area, index) => {
             const Icon = icons[area.icon];
+            const photo = impactPhotos[area.icon];
 
             return (
               <motion.article
@@ -40,12 +59,17 @@ export default function ImpactGrid() {
                 viewport={{ once: true, amount: 0.45 }}
                 transition={{ duration: 0.55, delay: index * 0.1 }}
               >
-                <div className="impact-icon" aria-hidden="true">
-                  <Icon size={24} />
+                <div className="impact-photo">
+                  <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
+                  <div className="impact-icon" aria-hidden="true">
+                    <Icon size={24} />
+                  </div>
                 </div>
-                <p className="card-eyebrow">{area.eyebrow}</p>
-                <h3>{area.title}</h3>
-                <p>{area.body}</p>
+                <div className="impact-card-body">
+                  <p className="card-eyebrow">{area.eyebrow}</p>
+                  <h3>{area.title}</h3>
+                  <p>{area.body}</p>
+                </div>
               </motion.article>
             );
           })}

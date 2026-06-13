@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { HeartHandshake, Menu, X } from "lucide-react";
+import BrandLogo from "./BrandLogo";
 import { navItems } from "../data/content";
 
 export default function Header() {
@@ -8,10 +9,10 @@ export default function Header() {
   return (
     <header className="site-header">
       <a className="brand" href="#top" aria-label="INF Canada home">
-        <span className="brand-mark">INF</span>
+        <BrandLogo className="brand-logo" inverted />
         <span>
           <strong>INF Canada</strong>
-          <small>For Nepal</small>
+          <small>International Nepal Fellowship</small>
         </span>
       </a>
 

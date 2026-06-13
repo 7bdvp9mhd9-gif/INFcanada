@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, CirclePlay } from "lucide-react";
 import heroImage from "../assets/hero-nepal.png";
+import MountainSignature from "./MountainSignature";
 import { heroStats } from "../data/content";
 
 export default function Hero() {
@@ -17,6 +18,7 @@ export default function Hero() {
         style={{ y: imageY }}
       />
       <div className="hero-scrim" />
+      <MountainSignature className="hero-mountain-signature" />
 
       <motion.div
         className="hero-copy"

@@ -1,14 +1,15 @@
 import { HeartHandshake } from "lucide-react";
+import BrandLogo from "./BrandLogo";
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div>
         <a className="brand footer-brand" href="#top" aria-label="INF Canada home">
-          <span className="brand-mark">INF</span>
+          <BrandLogo className="brand-logo" inverted />
           <span>
             <strong>INF Canada</strong>
-            <small>For Nepal</small>
+            <small>International Nepal Fellowship</small>
           </span>
         </a>
         <p>Designed as a clean first foundation for a Canadian INF presence.</p>

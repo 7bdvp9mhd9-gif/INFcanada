@@ -1,5 +1,6 @@
 import { MotionConfig, motion, useScroll } from "framer-motion";
 import Footer from "./components/Footer";
+import FundraisingProgress from "./components/FundraisingProgress";
 import GivingPath from "./components/GivingPath";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -18,6 +19,7 @@ export default function App() {
         <Hero />
         <ImpactGrid />
         <GivingPath />
+        <FundraisingProgress />
         <StoryBand />
         <Partners />
       </main>
