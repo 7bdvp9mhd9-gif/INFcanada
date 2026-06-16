@@ -7,21 +7,33 @@ import Hero from "./components/Hero";
 import ImpactGrid from "./components/ImpactGrid";
 import Partners from "./components/Partners";
 import StoryBand from "./components/StoryBand";
+import Team from "./components/Team";
+
+function isTeamPage() {
+  return window.location.pathname.replace(/\/$/, "") === "/team";
+}
 
 export default function App() {
   const { scrollYProgress } = useScroll();
+  const teamPage = isTeamPage();
 
   return (
     <MotionConfig reducedMotion="user">
       <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
       <Header />
-      <main>
-        <Hero />
-        <ImpactGrid />
-        <GivingPath />
-        <FundraisingProgress />
-        <StoryBand />
-        <Partners />
+      <main className={teamPage ? "page-main" : undefined}>
+        {teamPage ? (
+          <Team isPage />
+        ) : (
+          <>
+            <Hero />
+            <ImpactGrid />
+            <GivingPath />
+            <FundraisingProgress />
+            <StoryBand />
+            <Partners />
+          </>
+        )}
       </main>
       <Footer />
     </MotionConfig>

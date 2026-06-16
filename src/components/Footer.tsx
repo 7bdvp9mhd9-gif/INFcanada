@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div>
-        <a className="brand footer-brand" href="#top" aria-label="INF Canada home">
+        <a className="brand footer-brand" href="/#top" aria-label="INF Canada home">
           <BrandLogo className="brand-logo" inverted />
           <span>
             <strong>INF Canada</strong>
@@ -14,7 +14,7 @@ export default function Footer() {
         </a>
         <p>Designed as a clean first foundation for a Canadian INF presence.</p>
       </div>
-      <a className="button button-footer" href="#giving">
+      <a className="button button-footer" href="/#giving">
         <HeartHandshake size={18} aria-hidden="true" />
         <span>Donate</span>
       </a>

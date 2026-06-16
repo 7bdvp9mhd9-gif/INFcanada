@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header className="site-header">
-      <a className="brand" href="#top" aria-label="INF Canada home">
+      <a className="brand" href="/#top" aria-label="INF Canada home">
         <BrandLogo className="brand-logo" inverted />
         <span>
           <strong>INF Canada</strong>
@@ -18,13 +18,13 @@ export default function Header() {
 
       <nav className={isOpen ? "nav nav-open" : "nav"} aria-label="Primary navigation">
         {navItems.map((item) => (
-          <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsOpen(false)}>
-            {item}
+          <a key={item.href} href={item.href} onClick={() => setIsOpen(false)}>
+            {item.label}
           </a>
         ))}
       </nav>
 
-      <a className="header-donate" href="#giving">
+      <a className="header-donate" href="/#giving">
         <HeartHandshake size={18} aria-hidden="true" />
         <span>Donate</span>
       </a>
