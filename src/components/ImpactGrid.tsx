@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { CloudSun, HeartPulse, UsersRound } from "lucide-react";
-import healthPhoto from "../assets/photo-health-support.jpg";
-import communityPhoto from "../assets/photo-community-leadership.jpg";
-import resiliencePhoto from "../assets/photo-resilience-path.jpg";
+import healthPhoto from "../assets/images/photo-health-support.jpg";
+import communityPhoto from "../assets/images/photo-community-leadership.jpg";
+import resiliencePhoto from "../assets/images/photo-resilience-path.jpg";
 import { impactAreas, type IconMap } from "../data/content";
 
 const icons: IconMap = {

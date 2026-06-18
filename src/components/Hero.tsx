@@ -1,6 +1,6 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, CirclePlay } from "lucide-react";
-import heroImage from "../assets/hero-nepal.jpg";
+import heroImage from "../assets/images/hero-nepal.jpg";
 import MountainSignature from "./MountainSignature";
 import { heroStats } from "../data/content";
 
@@ -37,8 +37,8 @@ export default function Hero() {
           community strength, and resilience across Nepal.
         </p>
         <div className="hero-actions" aria-label="Primary actions">
-          <a className="button button-primary" href="#giving">
-            <span>Start giving</span>
+          <a className="button button-primary" href="/donate">
+            <span>Donate now</span>
             <ArrowRight size={18} aria-hidden="true" />
           </a>
           <a className="button button-secondary" href="#stories">

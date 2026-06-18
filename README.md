@@ -14,7 +14,9 @@ npm run build
 
 - `src/data/content.ts` keeps first-pass site copy and section data in one place.
 - `src/components/` holds reusable page sections.
-- `src/assets/hero-nepal.png` is a generated project-owned hero visual.
+- `src/assets/images/` stores site photography and generated project-owned visuals.
+- `src/assets/logos/`, `src/assets/mountains/`, and `src/assets/fonts/` group brand, mountain, and type assets.
+- `src/assets/reference/` keeps visual-check PNGs out of the project root.
 
 ## Next Layers
 

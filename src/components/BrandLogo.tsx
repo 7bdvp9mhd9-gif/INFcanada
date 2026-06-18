@@ -1,5 +1,5 @@
-import logoBlack from "../assets/inf-nepal-logo-black.svg";
-import logoWhite from "../assets/inf-nepal-logo-white.svg";
+import logoBlack from "../assets/logos/inf-nepal-logo-black.svg";
+import logoWhite from "../assets/logos/inf-nepal-logo-white.svg";
 
 type BrandLogoProps = {
   className?: string;

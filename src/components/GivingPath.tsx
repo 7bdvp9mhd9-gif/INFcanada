@@ -19,9 +19,9 @@ export default function GivingPath() {
             INF Canada can start with a simple promise: make generosity feel personal,
             transparent, and connected to communities doing the work on the ground.
           </p>
-          <a className="button button-dark" href="mailto:hello@infcanada.ca">
+          <a className="button button-dark" href="/donate">
             <HandCoins size={18} aria-hidden="true" />
-            <span>Talk about giving</span>
+            <span>See ways to donate</span>
           </a>
         </motion.div>
 

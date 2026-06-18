@@ -1,7 +1,7 @@
-import mountainCtaMax from "../assets/mountain-cta-max.svg";
-import mountainCtaMin from "../assets/mountain-cta-min.svg";
-import mountainMaskGreys from "../assets/mountain-mask-greys.svg";
-import mountainSilhouette from "../assets/mountain-silhouette.svg";
+import mountainCtaMax from "../assets/mountains/mountain-cta-max.svg";
+import mountainCtaMin from "../assets/mountains/mountain-cta-min.svg";
+import mountainMaskGreys from "../assets/mountains/mountain-mask-greys.svg";
+import mountainSilhouette from "../assets/mountains/mountain-silhouette.svg";
 
 type MountainSignatureVariant = "light" | "red" | "ink" | "silhouette" | "cta";
 
