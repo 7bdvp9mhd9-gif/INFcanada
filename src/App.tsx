@@ -9,6 +9,10 @@ import DonatePage from "./components/DonatePage";
 import Partners from "./components/Partners";
 import StoryBand from "./components/StoryBand";
 import Team from "./components/Team";
+import {
+  CommunityTransformationProjectsPage,
+  GreenPasturesHospitalPage,
+} from "./components/TravelProjectPages";
 import TravelToNepal from "./components/TravelToNepal";
 
 function getPage() {
@@ -21,14 +25,26 @@ export default function App() {
   const donatePage = page === "/donate";
   const teamPage = page === "/team";
   const travelPage = page === "/travel-to-nepal";
+  const communityProjectsPage = page === "/community-transformation-projects" || page === "/transformation";
+  const hospitalPage = page === "/inf-green-pastures-hospital" || page === "/hospital";
 
   return (
     <MotionConfig reducedMotion="user">
       <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
       <Header />
-      <main className={teamPage || travelPage || donatePage ? "page-main" : undefined}>
+      <main
+        className={
+          teamPage || travelPage || donatePage || communityProjectsPage || hospitalPage
+            ? "page-main"
+            : undefined
+        }
+      >
         {donatePage ? (
           <DonatePage />
+        ) : communityProjectsPage ? (
+          <CommunityTransformationProjectsPage />
+        ) : hospitalPage ? (
+          <GreenPasturesHospitalPage />
         ) : travelPage ? (
           <TravelToNepal />
         ) : teamPage ? (

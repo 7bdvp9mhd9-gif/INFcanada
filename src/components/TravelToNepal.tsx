@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import {
   ArrowRight,
+  CalendarDays,
   CheckCircle2,
   HeartHandshake,
   Hospital,
@@ -10,15 +11,13 @@ import {
   Plane,
   Sparkles,
   UsersRound,
+  X,
   XCircle,
 } from "lucide-react";
 import travelHeroImage from "../assets/images/travel-nepal-hero.jpg";
 import communityImage from "../assets/images/travel-community-projects.jpg";
 import hospitalImage from "../assets/images/travel-hospital-visit.jpg";
 import {
-  communityProjects,
-  communityProjectsIntro,
-  hospitalVisit,
   travelCostDetails,
   travelCountdownTarget,
   travelEligibility,
@@ -38,6 +37,12 @@ const reveal = {
   hidden: { opacity: 0, y: 34 },
   show: { opacity: 1, y: 0 },
 };
+
+const communityProjectsPreview =
+  "See how sponsorship and practical gifts support families in Kapilvastu through livelihood, education, and leadership projects.";
+
+const hospitalPreview =
+  "Visit Green Pastures Hospital in Pokhara and learn how rehabilitation care supports people affected by leprosy, injury, and disability.";
 
 function getCountdownParts(target: Date, now: number): CountdownPart[] {
   const distance = Math.max(target.getTime() - now, 0);
@@ -62,12 +67,35 @@ export default function TravelToNepal() {
   const copyY = useTransform(scrollY, [0, 740], [0, -34]);
   const target = useMemo(() => new Date(travelCountdownTarget), []);
   const [now, setNow] = useState(() => Date.now());
+  const [isItineraryOpen, setIsItineraryOpen] = useState(false);
   const countdownParts = getCountdownParts(target, now);
 
   useEffect(() => {
     const interval = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (!isItineraryOpen) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsItineraryOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isItineraryOpen]);
 
   return (
     <div className="travel-page">
@@ -232,31 +260,30 @@ export default function TravelToNepal() {
             </p>
           </motion.div>
 
-          <div className="travel-timeline">
-            {travelItinerary.map((item, index) => (
-              <motion.article
-                className="travel-timeline-item"
-                key={`${item.day}-${item.date}`}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.22 }}
-                transition={{ duration: 0.48, delay: Math.min(index * 0.035, 0.32), ease: [0.22, 1, 0.36, 1] }}
-              >
-                <div className="travel-timeline-date">
-                  <span>{item.day}</span>
-                  <strong>{item.date}</strong>
-                </div>
-                <div className="travel-timeline-body">
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                  <small>
-                    <MapPin size={14} aria-hidden="true" />
-                    {item.stay}
-                  </small>
-                </div>
-              </motion.article>
-            ))}
-          </div>
+          <motion.div
+            className="travel-itinerary-preview"
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.58, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="travel-itinerary-preview-copy">
+              <p className="card-eyebrow">17 days / November 7-24</p>
+              <h3>Open the sample itinerary as a day-by-day calendar.</h3>
+              <button className="button button-primary" type="button" onClick={() => setIsItineraryOpen(true)}>
+                <CalendarDays size={18} aria-hidden="true" />
+                <span>Take a look at the sample</span>
+              </button>
+            </div>
+            <div className="travel-itinerary-calendar-tease" aria-hidden="true">
+              <span>November</span>
+              <div>
+                {travelItinerary.slice(0, 12).map((item) => (
+                  <i key={item.day}>{item.day.replace("Day ", "")}</i>
+                ))}
+              </div>
+            </div>
+          </motion.div>
 
           <div className="travel-inclusion-grid">
             <motion.article
@@ -304,83 +331,158 @@ export default function TravelToNepal() {
         </div>
       </section>
 
-      <section className="travel-section travel-projects-section" id="projects" aria-labelledby="projects-title">
-        <div className="travel-section-inner travel-feature-layout">
+      <AnimatePresence>
+        {isItineraryOpen ? (
           <motion.div
-            className="travel-feature-media"
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.32 }}
-            transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+            className="travel-itinerary-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="itinerary-modal-title"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
           >
-            <img
-              src={communityImage}
-              alt="Community development gathering with families, goats, and a buffalo in Nepal."
-              loading="lazy"
-              decoding="async"
+            <motion.button
+              className="travel-itinerary-modal-backdrop"
+              type="button"
+              aria-label="Close sample itinerary"
+              onClick={() => setIsItineraryOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             />
-          </motion.div>
-          <motion.div
-            className="travel-feature-copy"
-            variants={reveal}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.64, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <p className="eyebrow">Projects</p>
-            <h2 id="projects-title">COMMUNITY TRANSFORMATION PROJECTS</h2>
-            <p>{communityProjectsIntro}</p>
-            <div className="travel-project-grid">
-              {communityProjects.map((project) => (
-                <article className="travel-project-card" key={project.title}>
-                  <HeartHandshake size={20} aria-hidden="true" />
-                  <h3>{project.title}</h3>
-                  <p>{project.body}</p>
-                </article>
-              ))}
-            </div>
-            <a className="button button-dark" href="/donate">
-              <span>Donate Now</span>
-              <ArrowRight size={18} aria-hidden="true" />
-            </a>
-          </motion.div>
-        </div>
-      </section>
+            <motion.div
+              className="travel-itinerary-modal-panel"
+              initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 38, scale: 0.96 }}
+              animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 24, scale: 0.98 }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="travel-itinerary-modal-header">
+                <div>
+                  <p className="eyebrow">NEPAL IMPACT TRIP</p>
+                  <h2 id="itinerary-modal-title">SAMPLE TRAVEL ITINERARY</h2>
+                  <p>
+                    Cultural touring in Kathmandu, a vision trip with INF Canada for sponsored
+                    children, and travel through Bandipur, Pokhara, Lumbini, Kapilvastu, and Ghandruk.
+                  </p>
+                </div>
+                <button
+                  className="travel-itinerary-close"
+                  type="button"
+                  aria-label="Close sample itinerary"
+                  onClick={() => setIsItineraryOpen(false)}
+                >
+                  <X size={22} aria-hidden="true" />
+                </button>
+              </div>
 
-      <section className="travel-section travel-hospital-section" aria-labelledby="hospital-title">
-        <div className="travel-section-inner travel-feature-layout reverse">
+              <div className="travel-calendar-grid" role="list">
+                {travelItinerary.map((item, index) => (
+                  <motion.article
+                    className="travel-calendar-day"
+                    key={`${item.day}-${item.date}`}
+                    role="listitem"
+                    initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.34, delay: Math.min(index * 0.025, 0.22), ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div className="travel-calendar-day-top">
+                      <span>{item.day}</span>
+                      <strong>{item.date}</strong>
+                    </div>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                    <small>
+                      <MapPin size={14} aria-hidden="true" />
+                      {item.stay}
+                    </small>
+                  </motion.article>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+
+      <section className="travel-section travel-projects-section" id="projects" aria-labelledby="projects-title">
+        <div className="travel-section-inner">
           <motion.div
-            className="travel-feature-copy"
+            className="section-heading travel-heading travel-projects-heading"
             variants={reveal}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.64, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="eyebrow">Care and rehabilitation</p>
-            <h2 id="hospital-title">INF GREEN PASTURES LEPROSY HOSPITAL</h2>
-            <p>{hospitalVisit}</p>
-            <a className="travel-inline-link" href="https://www.inf.org.np" target="_blank" rel="noreferrer">
-              <Hospital size={18} aria-hidden="true" />
-              <span>www.inf.org.np</span>
-              <ArrowRight size={16} aria-hidden="true" />
-            </a>
+            <p className="eyebrow">Choose what to explore</p>
+            <h2 id="projects-title">Two ways to see the work up close</h2>
+            <p>
+              The vision trip includes both community transformation work in Kapilvastu
+              and INF Green Pastures Hospital in Pokhara. Explore each focus on its own page.
+            </p>
           </motion.div>
-          <motion.div
-            className="travel-feature-media"
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.32 }}
-            transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <img
-              src={hospitalImage}
-              alt="A rehabilitation therapist supporting a patient during mobility practice in Nepal."
-              loading="lazy"
-              decoding="async"
-            />
-          </motion.div>
+
+          <div className="travel-pathway-grid">
+            <motion.article
+              className="travel-pathway-card"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.28 }}
+              transition={{ duration: 0.58, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="travel-pathway-image">
+                <img
+                  src={communityImage}
+                  alt="Community development gathering with families, goats, and a buffalo in Nepal."
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div className="travel-pathway-body">
+                <span className="travel-pathway-icon" aria-hidden="true">
+                  <HeartHandshake size={24} />
+                </span>
+                <p className="card-eyebrow">Kapilvastu</p>
+                <h3>Community Transformation Projects</h3>
+                <p className="travel-pathway-description">{communityProjectsPreview}</p>
+                <a className="button button-dark" href="/community-transformation-projects">
+                  <span>Explore Transformation</span>
+                  <ArrowRight size={18} aria-hidden="true" />
+                </a>
+              </div>
+            </motion.article>
+
+            <motion.article
+              className="travel-pathway-card"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.28 }}
+              transition={{ duration: 0.58, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="travel-pathway-image">
+                <img
+                  src={hospitalImage}
+                  alt="A rehabilitation therapist supporting a patient during mobility practice in Nepal."
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div className="travel-pathway-body">
+                <span className="travel-pathway-icon" aria-hidden="true">
+                  <Hospital size={24} />
+                </span>
+                <p className="card-eyebrow">Pokhara</p>
+                <h3>INF Green Pastures Leprosy Hospital</h3>
+                <p className="travel-pathway-description">{hospitalPreview}</p>
+                <a className="button button-dark" href="/inf-green-pastures-hospital">
+                  <span>Explore Hospital</span>
+                  <ArrowRight size={18} aria-hidden="true" />
+                </a>
+              </div>
+            </motion.article>
+          </div>
         </div>
       </section>
 

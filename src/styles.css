@@ -1866,9 +1866,10 @@ button {
 .donate-trust-copy {
   display: grid;
   min-width: 0;
-  padding: 44px;
+  padding: 52px 40px;
   align-content: center;
   justify-items: center;
+  row-gap: 18px;
   border-radius: 8px;
   background:
     linear-gradient(180deg, #ffffff 0%, rgba(247, 227, 225, 0.52) 100%),
@@ -1879,14 +1880,16 @@ button {
 }
 
 .donate-trust-copy .eyebrow {
+  margin: 0;
   color: var(--red);
 }
 
 .donate-trust-copy h2 {
-  max-width: 560px;
+  max-width: 500px;
+  margin: 0;
   color: var(--pine);
-  font-size: clamp(2.55rem, 4.6vw, 4.9rem);
-  line-height: 1;
+  font-size: clamp(2.45rem, 4.2vw, 4.35rem);
+  line-height: 0.98;
   overflow-wrap: break-word;
   text-wrap: balance;
 }
@@ -1897,7 +1900,7 @@ button {
 }
 
 .donate-trust-copy .button {
-  margin-top: 26px;
+  margin-top: 6px;
 }
 
 .donate-fact-grid {
@@ -2279,8 +2282,7 @@ button {
 
 .travel-info-panel h3,
 .travel-list-panel h3,
-.travel-project-card h3,
-.travel-timeline-body h3 {
+.travel-project-card h3 {
   margin: 0;
   color: var(--pine);
   font-size: 1.25rem;
@@ -2342,69 +2344,234 @@ button {
   color: #ffd36d;
 }
 
-.travel-timeline {
+.travel-itinerary-preview {
   display: grid;
-  gap: 10px;
-}
-
-.travel-timeline-item {
-  display: grid;
-  grid-template-columns: 190px 1fr;
-  gap: 18px;
-  align-items: stretch;
-}
-
-.travel-timeline-date,
-.travel-timeline-body {
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 28px;
+  align-items: center;
+  padding: 26px;
+  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.07)),
+    rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px rgba(31, 7, 9, 0.2);
+  backdrop-filter: blur(16px);
 }
 
-.travel-timeline-date {
+.travel-itinerary-preview-copy {
   display: grid;
-  align-content: center;
-  min-height: 128px;
-  padding: 22px;
+  gap: 18px;
+  justify-items: start;
 }
 
-.travel-timeline-date span {
+.travel-itinerary-preview-copy .card-eyebrow {
   color: #ffd36d;
-  font-size: 0.82rem;
-  font-weight: 800;
-  text-transform: uppercase;
 }
 
-.travel-timeline-date strong {
-  display: block;
-  margin-top: 10px;
+.travel-itinerary-preview-copy h3 {
+  max-width: 620px;
+  margin: 0;
   color: var(--white);
-  font-size: 1.28rem;
+  font-size: clamp(1.75rem, 3vw, 2.55rem);
+  line-height: 1.04;
+}
+
+.travel-itinerary-preview-copy .button {
+  width: fit-content;
+}
+
+.travel-itinerary-calendar-tease {
+  display: grid;
+  gap: 14px;
+  min-height: 210px;
+  padding: 18px;
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.travel-itinerary-calendar-tease > span {
+  color: var(--white);
+  font-size: 1.08rem;
+  font-weight: 900;
+}
+
+.travel-itinerary-calendar-tease div {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.travel-itinerary-calendar-tease i {
+  display: grid;
+  min-height: 36px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.travel-itinerary-calendar-tease i:nth-child(4n + 1) {
+  background: rgba(255, 211, 109, 0.2);
+  color: #ffd36d;
+}
+
+.travel-itinerary-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  color: var(--ink);
+}
+
+.travel-itinerary-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(24, 7, 9, 0.72);
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+}
+
+.travel-itinerary-modal-panel {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: min(1180px, 100%);
+  max-height: min(88svh, 860px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 8px;
+  background: #f8f4ec;
+  box-shadow: 0 32px 90px rgba(17, 5, 6, 0.42);
+}
+
+.travel-itinerary-modal-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: start;
+  padding: 26px;
+  background:
+    linear-gradient(135deg, rgba(74, 23, 25, 0.98), rgba(133, 37, 40, 0.94)),
+    var(--red-deep);
+  color: var(--white);
+}
+
+.travel-itinerary-modal-header .eyebrow {
+  color: #ffd36d;
+}
+
+.travel-itinerary-modal-header h2 {
+  margin: 0;
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 4.8vw, 4.8rem);
+  line-height: 0.95;
+  font-weight: 100;
+}
+
+.travel-itinerary-modal-header p:not(.eyebrow) {
+  max-width: 740px;
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
+}
+
+.travel-itinerary-close {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.travel-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  overflow: auto;
+  padding: 18px;
+  background:
+    linear-gradient(180deg, rgba(247, 227, 225, 0.28), rgba(255, 255, 255, 0.92));
+}
+
+.travel-calendar-day {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  min-height: 238px;
+  padding: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(74, 23, 25, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 40px rgba(74, 23, 25, 0.08);
+}
+
+.travel-calendar-day::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--red), var(--marigold));
+}
+
+.travel-calendar-day-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.travel-calendar-day-top span {
+  color: var(--red);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.travel-calendar-day-top strong {
+  color: var(--pine);
+  font-size: 0.94rem;
+  line-height: 1.22;
+  text-align: right;
+}
+
+.travel-calendar-day h3 {
+  margin: 16px 0 0;
+  color: var(--pine);
+  font-size: 1.08rem;
   line-height: 1.18;
 }
 
-.travel-timeline-body {
-  padding: 22px;
+.travel-calendar-day p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.48;
 }
 
-.travel-timeline-body h3 {
-  color: var(--white);
-}
-
-.travel-timeline-body p {
-  margin: 11px 0 0;
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.62;
-}
-
-.travel-timeline-body small {
+.travel-calendar-day small {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-top: 15px;
-  color: rgba(255, 255, 255, 0.72);
-  font-weight: 700;
+  margin-top: auto;
+  padding-top: 14px;
+  color: var(--red-deep);
+  font-weight: 800;
+  line-height: 1.3;
 }
 
 .travel-inclusion-grid {
@@ -2480,6 +2647,118 @@ button {
 
 .travel-feature-copy > .button {
   margin-top: 26px;
+}
+
+.travel-projects-section {
+  background:
+    linear-gradient(180deg, #ffffff 0%, rgba(247, 227, 225, 0.42) 100%);
+}
+
+.travel-projects-heading {
+  max-width: 780px;
+}
+
+.travel-pathway-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.travel-pathway-card {
+  display: grid;
+  grid-template-rows: 260px 1fr;
+  min-height: 570px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 24px 60px rgba(74, 23, 25, 0.12);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.travel-pathway-card:hover {
+  border-color: rgba(201, 53, 53, 0.28);
+  box-shadow: 0 30px 70px rgba(74, 23, 25, 0.16);
+  transform: translateY(-5px);
+}
+
+.travel-pathway-image {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--pine);
+}
+
+.travel-pathway-image::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(74, 23, 25, 0) 44%, rgba(74, 23, 25, 0.54) 100%),
+    linear-gradient(90deg, rgba(201, 53, 53, 0.24), rgba(201, 53, 53, 0) 58%);
+  content: "";
+}
+
+.travel-pathway-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  object-fit: cover;
+  transition: transform 520ms ease;
+}
+
+.travel-pathway-card:hover .travel-pathway-image img {
+  transform: scale(1.04);
+}
+
+.travel-pathway-body {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  align-content: stretch;
+  padding: 30px;
+}
+
+.travel-pathway-icon {
+  display: inline-grid;
+  width: 58px;
+  height: 58px;
+  margin: 0 0 22px;
+  place-items: center;
+  border: 1px solid rgba(201, 53, 53, 0.16);
+  border-radius: 8px;
+  background: var(--red);
+  color: var(--white);
+  box-shadow: 0 14px 28px rgba(74, 23, 25, 0.16);
+}
+
+.travel-pathway-card:nth-child(2) .travel-pathway-icon {
+  border-color: rgba(52, 89, 149, 0.18);
+  background: var(--blue);
+}
+
+.travel-pathway-body .card-eyebrow {
+  margin-bottom: 12px;
+}
+
+.travel-pathway-body h3 {
+  margin: 0;
+  color: var(--pine);
+  font-size: clamp(1.55rem, 2.5vw, 2.1rem);
+  line-height: 1.05;
+}
+
+.travel-pathway-description {
+  margin: 16px 0 0;
+  color: var(--muted);
+  line-height: 1.68;
+}
+
+.travel-pathway-body .button {
+  width: fit-content;
+  margin-top: 24px;
 }
 
 .travel-project-grid {
@@ -2574,6 +2853,360 @@ button {
 .travel-contact-form .button {
   width: fit-content;
   margin-top: 8px;
+}
+
+.project-detail-page {
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #f6f7f4 0%, #ffffff 42%, rgba(247, 227, 225, 0.56) 100%);
+  color: var(--ink);
+}
+
+.project-detail-hero {
+  position: relative;
+  display: grid;
+  align-content: end;
+  min-height: 94svh;
+  padding: 134px 20px 48px;
+  overflow: hidden;
+  color: var(--white);
+  isolation: isolate;
+}
+
+.project-detail-hero-image {
+  position: absolute;
+  inset: -6% 0 0;
+  z-index: -3;
+  width: 100%;
+  height: 112%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.project-detail-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(50, 9, 12, 0.9) 0%, rgba(70, 18, 20, 0.68) 42%, rgba(70, 18, 20, 0.24) 74%),
+    linear-gradient(180deg, rgba(27, 8, 9, 0.48) 0%, rgba(27, 8, 9, 0.2) 50%, rgba(246, 247, 244, 0.9) 100%);
+}
+
+.hospital-detail-page .project-detail-hero-scrim {
+  background:
+    linear-gradient(90deg, rgba(26, 44, 57, 0.88) 0%, rgba(52, 89, 149, 0.6) 40%, rgba(74, 23, 25, 0.2) 74%),
+    linear-gradient(180deg, rgba(24, 31, 38, 0.42) 0%, rgba(24, 31, 38, 0.16) 50%, rgba(246, 247, 244, 0.9) 100%);
+}
+
+.project-detail-hero-copy,
+.project-detail-stat-strip {
+  width: min(1120px, 100%);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.project-detail-hero-copy {
+  display: grid;
+  max-width: 1120px;
+  align-content: end;
+}
+
+.project-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin-bottom: 22px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.88rem;
+  font-weight: 800;
+  backdrop-filter: blur(14px);
+}
+
+.project-detail-hero-copy .eyebrow {
+  color: #ffd36d;
+}
+
+.project-detail-hero-copy h1 {
+  max-width: 870px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 7.2vw, 8.2rem);
+  line-height: 0.9;
+  font-weight: 100;
+}
+
+.project-detail-hero-copy p:not(.eyebrow) {
+  max-width: 680px;
+  margin: 24px 0 0;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: clamp(1rem, 1.55vw, 1.2rem);
+  line-height: 1.7;
+}
+
+.project-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.project-detail-stat-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 42px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+}
+
+.project-detail-stat {
+  min-height: 110px;
+  padding: 22px;
+  background: rgba(68, 18, 20, 0.58);
+}
+
+.hospital-detail-page .project-detail-stat {
+  background: rgba(27, 49, 64, 0.58);
+}
+
+.project-detail-stat strong,
+.project-detail-stat span {
+  display: block;
+}
+
+.project-detail-stat strong {
+  color: var(--white);
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  line-height: 1;
+}
+
+.project-detail-stat span {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.35;
+}
+
+.project-detail-section {
+  padding: 96px 20px;
+}
+
+.project-detail-inner {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.project-detail-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.project-detail-split-tight {
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+}
+
+.project-detail-copy h2,
+.project-detail-cta h2 {
+  margin: 0;
+  color: var(--pine);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.9rem);
+  line-height: 0.98;
+  font-weight: 100;
+}
+
+.project-detail-copy p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.74;
+}
+
+.project-detail-image-panel {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 24px 60px rgba(74, 23, 25, 0.16);
+}
+
+.project-detail-image-panel img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  object-fit: cover;
+}
+
+.project-detail-image-panel::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(74, 23, 25, 0) 52%, rgba(74, 23, 25, 0.68) 100%);
+  content: "";
+}
+
+.project-image-note {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  left: 22px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 13px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  background: rgba(74, 23, 25, 0.78);
+  color: rgba(255, 255, 255, 0.86);
+  font-weight: 800;
+  backdrop-filter: blur(14px);
+}
+
+.hospital-detail-page .project-image-note {
+  background: rgba(27, 49, 64, 0.78);
+}
+
+.project-detail-soft-section {
+  background:
+    linear-gradient(180deg, rgba(247, 227, 225, 0.36) 0%, #ffffff 100%);
+}
+
+.project-detail-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.project-detail-card {
+  min-height: 310px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 46px rgba(74, 23, 25, 0.1);
+}
+
+.project-detail-card svg {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 24px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--red-soft);
+  color: var(--red-deep);
+}
+
+.hospital-detail-page .project-detail-card svg {
+  background: #e6ecfa;
+  color: var(--blue);
+}
+
+.project-detail-card h3,
+.project-detail-step h3 {
+  margin: 0;
+  color: var(--pine);
+  font-size: 1.28rem;
+  line-height: 1.2;
+}
+
+.project-detail-card p,
+.project-detail-step p {
+  color: var(--muted);
+  line-height: 1.64;
+}
+
+.project-detail-step-list {
+  display: grid;
+  gap: 12px;
+}
+
+.project-detail-step {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 18px;
+  align-items: start;
+  min-height: 134px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 42px rgba(74, 23, 25, 0.08);
+}
+
+.project-detail-step > span {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--marigold);
+  color: var(--pine);
+  font-weight: 900;
+}
+
+.project-detail-step.icon-step > span {
+  background: #e6ecfa;
+  color: var(--blue);
+}
+
+.project-detail-step p {
+  margin-bottom: 0;
+}
+
+.project-detail-cta-section {
+  padding-top: 24px;
+}
+
+.project-detail-cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: center;
+  padding: 34px;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(74, 23, 25, 0.96), rgba(143, 36, 40, 0.92)),
+    var(--pine);
+  color: var(--white);
+  box-shadow: 0 24px 60px rgba(74, 23, 25, 0.18);
+}
+
+.hospital-detail-page .project-detail-cta {
+  background:
+    linear-gradient(135deg, rgba(27, 49, 64, 0.96), rgba(52, 89, 149, 0.9)),
+    var(--blue);
+}
+
+.project-detail-cta .eyebrow,
+.project-detail-cta h2 {
+  color: var(--white);
+}
+
+.project-detail-cta .eyebrow {
+  color: #ffd36d;
+}
+
+.project-detail-cta h2 {
+  max-width: 720px;
+  font-size: clamp(2.2rem, 4vw, 3.9rem);
+}
+
+.project-detail-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
 }
 
 @media (max-width: 880px) {
@@ -2712,22 +3345,54 @@ button {
   .travel-inclusion-grid,
   .travel-feature-layout,
   .travel-feature-layout.reverse,
-  .travel-contact-panel {
+  .travel-contact-panel,
+  .travel-pathway-grid,
+  .project-detail-split,
+  .project-detail-split-tight,
+  .project-detail-card-grid,
+  .project-detail-cta {
     grid-template-columns: 1fr;
   }
 
-  .travel-timeline-item {
+  .travel-itinerary-preview {
     grid-template-columns: 1fr;
-    gap: 8px;
   }
 
-  .travel-timeline-date {
+  .travel-itinerary-calendar-tease {
     min-height: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    border-left: 0;
+  }
+
+  .travel-calendar-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .travel-feature-media,
   .travel-feature-media img {
     min-height: 420px;
+  }
+
+  .travel-pathway-card {
+    min-height: 0;
+  }
+
+  .project-detail-hero {
+    min-height: auto;
+    padding: 134px 20px 48px;
+  }
+
+  .project-detail-stat-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .project-detail-image-panel,
+  .project-detail-image-panel img {
+    min-height: 420px;
+  }
+
+  .project-detail-cta-actions {
+    justify-content: flex-start;
   }
 
   .giving-layout {
@@ -2888,9 +3553,57 @@ button {
     min-height: 310px;
   }
 
-  .travel-timeline-date,
-  .travel-timeline-body {
-    padding: 18px;
+  .travel-itinerary-preview {
+    padding: 22px;
+  }
+
+  .travel-itinerary-preview-copy .button {
+    width: 100%;
+  }
+
+  .travel-itinerary-calendar-tease {
+    display: none;
+  }
+
+  .travel-itinerary-modal {
+    padding: 0;
+    place-items: stretch;
+  }
+
+  .travel-itinerary-modal-panel {
+    width: 100%;
+    max-height: none;
+    border-radius: 0;
+  }
+
+  .travel-itinerary-modal-header {
+    gap: 16px;
+    padding: 20px 16px;
+  }
+
+  .travel-itinerary-modal-header h2 {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+  }
+
+  .travel-itinerary-modal-header p:not(.eyebrow) {
+    margin-top: 10px;
+    font-size: 0.94rem;
+    line-height: 1.48;
+  }
+
+  .travel-itinerary-close {
+    width: 40px;
+    height: 40px;
+  }
+
+  .travel-calendar-grid {
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .travel-calendar-day {
+    min-height: 224px;
+    padding: 16px;
   }
 
   .travel-project-card {
@@ -2903,6 +3616,75 @@ button {
 
   .travel-contact-form .button {
     width: 100%;
+  }
+
+  .travel-pathway-body {
+    padding: 24px;
+  }
+
+  .travel-pathway-body .button {
+    width: 100%;
+  }
+
+  .travel-pathway-icon {
+    margin-bottom: 18px;
+  }
+
+  .project-detail-hero {
+    padding: 124px 16px 38px;
+  }
+
+  .project-detail-hero-copy h1 {
+    font-size: clamp(3rem, 14vw, 4.4rem);
+  }
+
+  .project-detail-actions,
+  .project-detail-actions .button,
+  .project-detail-cta-actions,
+  .project-detail-cta-actions .button {
+    width: 100%;
+  }
+
+  .project-detail-actions,
+  .project-detail-cta-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .project-detail-section {
+    padding: 74px 16px;
+  }
+
+  .project-detail-copy h2,
+  .project-detail-cta h2 {
+    font-size: clamp(2.35rem, 13vw, 3.4rem);
+  }
+
+  .project-detail-image-panel,
+  .project-detail-image-panel img {
+    min-height: 310px;
+  }
+
+  .project-image-note {
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
+    align-items: flex-start;
+  }
+
+  .project-detail-card,
+  .project-detail-step,
+  .project-detail-cta {
+    padding: 22px;
+  }
+
+  .project-detail-step {
+    grid-template-columns: 44px 1fr;
+  }
+
+  .project-detail-step > span {
+    width: 42px;
+    height: 42px;
   }
 
   .hero-image {
