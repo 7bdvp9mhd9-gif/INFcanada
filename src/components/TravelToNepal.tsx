@@ -278,8 +278,13 @@ export default function TravelToNepal() {
             <div className="travel-itinerary-calendar-tease" aria-hidden="true">
               <span>November</span>
               <div>
-                {travelItinerary.slice(0, 12).map((item) => (
-                  <i key={item.day}>{item.day.replace("Day ", "")}</i>
+                {["S", "M", "T", "W", "T", "F", "S"].map((day, index) => (
+                  <b key={`${day}-${index}`}>{day}</b>
+                ))}
+                {Array.from({ length: 30 }, (_, index) => index + 1).map((day) => (
+                  <i className={day >= 7 && day <= 24 ? "is-away" : undefined} key={day}>
+                    {day}
+                  </i>
                 ))}
               </div>
             </div>
