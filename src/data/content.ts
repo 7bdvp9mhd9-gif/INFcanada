@@ -46,15 +46,12 @@ export type IconMap = Record<ImpactArea["icon"], LucideIcon>;
 
 export const navItems: NavItem[] = [
   { label: "What We Do", href: "/what-we-do" },
-  { label: "Giving", href: "/donate" },
-  { label: "Stories", href: "/#stories" },
   {
     label: "Get Involved",
     href: "/travel-to-nepal",
     children: [{ label: "Travel to Nepal", href: "/travel-to-nepal" }],
   },
   { label: "Our Team", href: "/team" },
-  { label: "Partners", href: "/#partners" },
 ];
 
 export const heroStats = [
