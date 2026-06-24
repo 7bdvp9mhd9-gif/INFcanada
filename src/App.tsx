@@ -14,6 +14,7 @@ import {
   GreenPasturesHospitalPage,
 } from "./components/TravelProjectPages";
 import TravelToNepal from "./components/TravelToNepal";
+import WhatWeDoPage from "./components/WhatWeDoPage";
 
 function getPage() {
   return window.location.pathname.replace(/\/$/, "");
@@ -25,6 +26,7 @@ export default function App() {
   const donatePage = page === "/donate";
   const teamPage = page === "/team";
   const travelPage = page === "/travel-to-nepal";
+  const whatWeDoPage = page === "/what-we-do" || page === "/what-do-we-do";
   const communityProjectsPage = page === "/community-transformation-projects" || page === "/transformation";
   const hospitalPage = page === "/inf-green-pastures-hospital" || page === "/hospital";
 
@@ -34,13 +36,15 @@ export default function App() {
       <Header />
       <main
         className={
-          teamPage || travelPage || donatePage || communityProjectsPage || hospitalPage
+          teamPage || travelPage || donatePage || whatWeDoPage || communityProjectsPage || hospitalPage
             ? "page-main"
             : undefined
         }
       >
         {donatePage ? (
           <DonatePage />
+        ) : whatWeDoPage ? (
+          <WhatWeDoPage />
         ) : communityProjectsPage ? (
           <CommunityTransformationProjectsPage />
         ) : hospitalPage ? (
