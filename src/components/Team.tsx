@@ -1,17 +1,40 @@
-import { motion } from "framer-motion";
 import { ArrowUpRight, HandHeart, Sparkles } from "lucide-react";
 import kamalPhoto from "../assets/images/team-kamal-ghamal.jpg";
 import jenniferPhoto from "../assets/images/team-jennifer-huang.jpeg";
+import davidPhoto from "../assets/images/team-david-stevens.jpg";
+import evelynPhoto from "../assets/images/team-evelyn-villanueva.jpg";
 import { teamMembers, type TeamMember } from "../data/content";
 
 const teamPhotos = {
   kamal: kamalPhoto,
   jennifer: jenniferPhoto,
-} satisfies Record<TeamMember["image"], string>;
+  david: davidPhoto,
+  evelyn: evelynPhoto,
+} satisfies Record<NonNullable<TeamMember["image"]>, string>;
 
 type TeamProps = {
   isPage?: boolean;
 };
+
+const bioPreviewLength = 360;
+
+function splitBioPreview(bio: string) {
+  if (bio.length <= bioPreviewLength) {
+    return { intro: bio, more: [] };
+  }
+
+  const excerpt = bio.slice(0, bioPreviewLength);
+  const sentenceBreak = Math.max(excerpt.lastIndexOf(". "), excerpt.lastIndexOf('." '));
+  const wordBreak = excerpt.lastIndexOf(" ");
+  const splitIndex = sentenceBreak > 240 ? sentenceBreak + 1 : wordBreak;
+  const intro = `${bio.slice(0, splitIndex).trim()}...`;
+  const remaining = bio.slice(splitIndex).trim();
+
+  return {
+    intro,
+    more: remaining.split("\n\n").filter(Boolean),
+  };
+}
 
 export default function Team({ isPage = false }: TeamProps) {
   return (
@@ -21,71 +44,56 @@ export default function Team({ isPage = false }: TeamProps) {
       aria-labelledby="team-title"
     >
       <div className="section-inner team-inner">
-        <motion.div
-          className="section-heading team-heading"
-          initial={{ y: 24, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.45 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div className="section-heading team-heading">
           <p className="eyebrow">Our team</p>
           <h2 id="team-title">People carrying the mission with care.</h2>
           <p>
             INF Canada is being shaped by people who believe generosity should feel
             personal, transparent, and close to the communities it serves.
           </p>
-        </motion.div>
+        </div>
 
         <div className="team-showcase">
-          <motion.div
-            className="team-mission-panel"
-            initial={{ x: -26, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.36 }}
-            transition={{ duration: 0.68, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div className="team-mission-panel">
             <div className="team-mission-icon" aria-hidden="true">
               <HandHeart size={28} />
             </div>
             <p className="card-eyebrow">Canadian roots, Nepali partnership</p>
             <h3>Built around trust, dignity, and steady relationship.</h3>
             <p>
-              This page is ready for the first two team profiles, with space for each
-              person's story, role, and connection to the work.
+              Meet the people helping carry INF Canada's work with practical care,
+              faithful stewardship, and long-term relationship.
             </p>
             <a className="team-link" href="/#partners">
               <span>See the wider partnership</span>
               <ArrowUpRight size={18} aria-hidden="true" />
             </a>
-          </motion.div>
+          </div>
 
           <div className="team-card-grid">
             {teamMembers.map((member, index) => {
-              const paragraphs = member.bio.split("\n\n");
-              const previewCount = member.image === "jennifer" ? 2 : 1;
-              const intro = paragraphs.slice(0, previewCount);
-              const more = paragraphs.slice(previewCount);
+              const { intro, more } = splitBioPreview(member.bio);
+              const photo = member.image ? teamPhotos[member.image] : undefined;
 
               return (
-                <motion.article
+                <article
                   className="team-card"
                   key={`${member.name}-${index}`}
-                  initial={{ y: 34, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  whileHover={{ y: -8 }}
-                  viewport={{ once: true, amount: 0.38 }}
-                  transition={{ duration: 0.58, delay: index * 0.11, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <div className="team-portrait">
                     <div className="team-portrait-ring" />
-                    <img src={teamPhotos[member.image]} alt={member.imageAlt} loading="lazy" decoding="async" />
+                    {photo ? (
+                      <img src={photo} alt={member.imageAlt} loading="eager" decoding="async" />
+                    ) : (
+                      <div className="team-portrait-fallback" aria-label={`${member.name} portrait placeholder`}>
+                        {member.initials}
+                      </div>
+                    )}
                   </div>
                   <div className="team-card-body">
                     <p className="card-eyebrow">{member.role}</p>
                     <h3>{member.name}</h3>
-                    {intro.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
+                    <p>{intro}</p>
                     {more.length > 0 ? (
                       <details className="team-bio-more">
                         <summary>
@@ -101,7 +109,7 @@ export default function Team({ isPage = false }: TeamProps) {
                   <div className="team-card-spark" aria-hidden="true">
                     <Sparkles size={18} />
                   </div>
-                </motion.article>
+                </article>
               );
             })}
           </div>

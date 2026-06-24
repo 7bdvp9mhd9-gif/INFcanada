@@ -10,7 +10,6 @@ export default function Footer() {
           <BrandLogo className="brand-logo" inverted />
           <CanadaMark />
         </a>
-        <p>Designed as a clean first foundation for a Canadian INF presence.</p>
       </div>
       <a className="button button-footer" href="/donate">
         <HeartHandshake size={18} aria-hidden="true" />

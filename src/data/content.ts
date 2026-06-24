@@ -32,8 +32,8 @@ export type TeamMember = {
   role: string;
   bio: string;
   initials: string;
-  image: "kamal" | "jennifer";
-  imageAlt: string;
+  image?: "kamal" | "jennifer" | "david" | "evelyn";
+  imageAlt?: string;
 };
 
 export type NavItem = {
@@ -144,5 +144,21 @@ export const teamMembers: TeamMember[] = [
     initials: "JH",
     image: "jennifer",
     imageAlt: "Jennifer Huang smiling outdoors in a white jacket and green scarf.",
+  },
+  {
+    name: "David Stevens",
+    role: "Director",
+    bio: '"Serving others is my privilege; inspiring others to serve, my passion."\n\nDavid Stevens has retired from a career of facilitating communities, organizations and individuals as a trusted adviser and mentor. His motto has been "Serving others is my privilege; inspiring others to serve, my passion." He had extensive experience in providing leadership to individuals and organizations with a focus on building sustainable human service institutions and community organizations.\n\nDavid served in Kathmandu, Nepal with the United Mission to Nepal (1984 - 99) and with the International Nepal Fellowship (2007 - 10). He has also taught a variety of courses over several years at Prairie Bible College. His professional degrees are an MSW in Community Development and Social Planning (1983) and a Doctorate in Education (2007).\n\nDavid and Carol Stevens were Partners with Interserve for over 27 years. They are now both enjoying retirement in Three Hills, Alberta. They have two married children and four grandchildren.',
+    initials: "DS",
+    image: "david",
+    imageAlt: "David Stevens smiling outdoors in front of greenery.",
+  },
+  {
+    name: "Evelyn Villanueva",
+    role: "Director",
+    bio: "Evelyn Villanueva is an Accountant (CPA, Phils) and has worked at UPS Canada for 22 years. She was previously the Managing Partner and auditor of CVC CPAs Philippines from 1997 - 2001, providing audit and bookkeeping services to small businesses and non-profit organizations in the Philippines.\n\nShe was also an accredited auditor of EZE (Evangelische Zentralstelle fur Entwicklungshilfe e.V., Protestant Association for Cooperation in Development), ensuring grant compliance for support given to local NGO partners.\n\nEvelyn combines technical expertise with a deep commitment to ethical stewardship, helping ensure every dollar supports the mission and sustainable development through transparent reporting. She is currently working as Bookkeeper at Gilmore Park United Church in Richmond, BC, Canada.",
+    initials: "EV",
+    image: "evelyn",
+    imageAlt: "Evelyn Villanueva standing indoors in a red plaid shirt.",
   },
 ];
