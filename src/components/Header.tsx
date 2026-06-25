@@ -26,14 +26,26 @@ export default function Header() {
             <div
               className={openDropdown === item.label ? "nav-item nav-item-open" : "nav-item"}
               key={item.label}
+              onMouseEnter={() => setOpenDropdown(item.label)}
+              onMouseLeave={() => setOpenDropdown(null)}
+              onFocus={() => setOpenDropdown(item.label)}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) {
+                  setOpenDropdown(null);
+                }
+              }}
             >
               <button
                 className="nav-trigger"
                 type="button"
                 aria-expanded={openDropdown === item.label}
-                onClick={() =>
-                  setOpenDropdown((current) => (current === item.label ? null : item.label))
-                }
+                onClick={() => {
+                  if (!isOpen) {
+                    return;
+                  }
+
+                  setOpenDropdown((current) => (current === item.label ? null : item.label));
+                }}
               >
                 <span>{item.label}</span>
                 <ChevronDown size={16} aria-hidden="true" />

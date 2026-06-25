@@ -32,10 +32,6 @@ export default function StoryBand() {
           <Quote size={31} aria-hidden="true" />
           <p className="eyebrow">Shared INF vision</p>
           <h2 id="story-title">Life in all its fullness for people and communities in Nepal.</h2>
-          <p>
-            The story system can grow from here: field updates, supporter journeys,
-            project reports, short films, and campaign pages that show dignity before need.
-          </p>
         </motion.div>
       </div>
     </section>

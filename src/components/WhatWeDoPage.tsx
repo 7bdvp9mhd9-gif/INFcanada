@@ -110,7 +110,7 @@ const focusPoints = [
   },
   {
     icon: UsersRound,
-    title: "Women's opportunity",
+    title: "Women's Capacity Building",
     body: "Mentoring and practical skills that support dignity, confidence, and long-term sustainability.",
   },
   {
@@ -216,39 +216,6 @@ export default function WhatWeDoPage() {
         >
           <p className="eyebrow">Our projects / What we do</p>
           <h1 id="what-title">Compassion, development, and transformation in Nepal.</h1>
-          <p>
-            INF Canada focuses on three core projects in Nepal that provide compassionate
-            care, strengthen women's opportunities, and support long-term community transformation.
-          </p>
-          <div className="what-hero-actions" aria-label="What we do actions">
-            <a className="button button-primary" href="#projects">
-              <span>Explore the projects</span>
-              <ArrowRight size={18} aria-hidden="true" />
-            </a>
-            <a className="button button-secondary" href="/donate">
-              <HeartHandshake size={18} aria-hidden="true" />
-              <span>Donate</span>
-            </a>
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="what-hero-panel"
-          initial={{ opacity: 0, y: 34, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ delay: 0.18, duration: 0.68, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {projects.map((project) => {
-            const Icon = project.icon;
-
-            return (
-              <a className={`what-hero-pill what-pill-${project.accent}`} href={`#${project.id}`} key={project.id}>
-                <span>{project.number}</span>
-                <Icon size={20} aria-hidden="true" />
-                <strong>{project.label}</strong>
-              </a>
-            );
-          })}
         </motion.div>
       </section>
 

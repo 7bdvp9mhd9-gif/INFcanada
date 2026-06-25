@@ -1,28 +1,28 @@
 import { motion } from "framer-motion";
-import { CloudSun, HeartPulse, UsersRound } from "lucide-react";
+import { GraduationCap, HeartPulse, UsersRound } from "lucide-react";
 import healthPhoto from "../assets/images/photo-health-support.jpg";
 import communityPhoto from "../assets/images/photo-community-leadership.jpg";
-import resiliencePhoto from "../assets/images/photo-resilience-path.jpg";
+import hospitalPhoto from "../assets/images/photo-medical-charity-care.jpg";
 import { impactAreas, type IconMap } from "../data/content";
 
 const icons: IconMap = {
-  health: HeartPulse,
+  women: GraduationCap,
   community: UsersRound,
-  climate: CloudSun,
+  hospital: HeartPulse,
 };
 
 const impactPhotos = {
-  health: {
+  women: {
     src: healthPhoto,
-    alt: "A Nepali health worker speaking with a community member in a hillside village.",
+    alt: "Two women meeting in a hillside Nepali community as part of a capacity-building visit.",
   },
   community: {
     src: communityPhoto,
     alt: "A local community group meeting together beside terraced hills in Nepal.",
   },
-  climate: {
-    src: resiliencePhoto,
-    alt: "Community members walking a mountain path in Nepal with terraced hills behind them.",
+  hospital: {
+    src: hospitalPhoto,
+    alt: "A rehabilitation worker supporting a patient practicing with a walker at an INF hospital in Nepal.",
   },
 } satisfies Record<keyof typeof icons, { src: string; alt: string }>;
 
@@ -38,10 +38,10 @@ export default function ImpactGrid() {
           transition={{ duration: 0.6 }}
         >
           <p className="eyebrow">Where giving moves first</p>
-          <h2 id="work-title">Practical work with a human centre.</h2>
+          <h2 id="work-title">Three projects, one shared purpose.</h2>
           <p>
-            The first site foundation is built around the same core themes carried across
-            the INF family: health, opportunity, inclusion, and community resilience.
+            INF Canada supports women&apos;s capacity building, community transformation,
+            and medical charity care through trusted work in Nepal.
           </p>
         </motion.div>
 
@@ -51,9 +51,11 @@ export default function ImpactGrid() {
             const photo = impactPhotos[area.icon];
 
             return (
-              <motion.article
+              <motion.a
                 className="impact-card"
+                href={area.href}
                 key={area.title}
+                aria-label={`Read more about ${area.title}`}
                 initial={{ y: 34 }}
                 whileInView={{ y: 0 }}
                 viewport={{ once: true, amount: 0.45 }}
@@ -70,7 +72,7 @@ export default function ImpactGrid() {
                   <h3>{area.title}</h3>
                   <p>{area.body}</p>
                 </div>
-              </motion.article>
+              </motion.a>
             );
           })}
         </div>

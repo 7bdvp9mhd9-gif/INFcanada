@@ -1,10 +1,11 @@
 import type { LucideIcon } from "lucide-react";
 
 export type ImpactArea = {
-  icon: "health" | "community" | "climate";
+  icon: "women" | "community" | "hospital";
   eyebrow: string;
   title: string;
   body: string;
+  href: string;
 };
 
 export type GivingStep = {
@@ -45,13 +46,18 @@ export type NavItem = {
 export type IconMap = Record<ImpactArea["icon"], LucideIcon>;
 
 export const navItems: NavItem[] = [
+  { label: "Home", href: "/" },
   { label: "What We Do", href: "/what-we-do" },
   {
     label: "Get Involved",
     href: "/travel-to-nepal",
     children: [{ label: "Travel to Nepal", href: "/travel-to-nepal" }],
   },
-  { label: "Our Team", href: "/team" },
+  {
+    label: "About Us",
+    href: "/team",
+    children: [{ label: "Our Team", href: "/team" }],
+  },
 ];
 
 export const heroStats = [
@@ -62,22 +68,25 @@ export const heroStats = [
 
 export const impactAreas: ImpactArea[] = [
   {
-    icon: "health",
-    eyebrow: "Health & disability",
-    title: "Specialist care with dignity",
-    body: "Support holistic treatment, rehabilitation, counselling, and practical care for people too often pushed to the margins.",
+    icon: "women",
+    eyebrow: "Women's capacity building",
+    title: "Women's Capacity Building Project",
+    body: "Equip women in Nepal with practical training, mentoring, and encouragement for dignity, leadership, and long-term resilience.",
+    href: "/what-we-do#womens-capacity",
   },
   {
     icon: "community",
-    eyebrow: "Community strength",
-    title: "Change led from within",
-    body: "Help local groups build livelihoods, improve family health, and create the kind of change that lasts beyond a single project.",
+    eyebrow: "Community transformation",
+    title: "Community Transformation Project",
+    body: "Support community-led projects in Kapilvastu that strengthen opportunity, wellbeing, and practical resources for families.",
+    href: "/what-we-do#kapilvastu-transformation",
   },
   {
-    icon: "climate",
-    eyebrow: "Disaster & climate",
-    title: "Resilience before crisis",
-    body: "Stand with communities preparing for floods, landslides, changing seasons, and the emergencies that follow.",
+    icon: "hospital",
+    eyebrow: "Medical charity project",
+    title: "Medical Charity Project",
+    body: "Help provide treatment, rehabilitation, and mobility support through INF Green Pastures hospital care for people who need it most.",
+    href: "/what-we-do#medical-charity",
   },
 ];
 
