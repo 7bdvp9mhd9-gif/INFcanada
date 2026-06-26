@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Droplets, Flag, Target, Waves } from "lucide-react";
-import { fundraisingProgress } from "../data/content";
+import { fundraisingProgress } from "../../data/content";
 
 const moneyFormatter = new Intl.NumberFormat("en-CA", {
   style: "currency",

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ChevronDown, HeartHandshake, Menu, X } from "lucide-react";
-import BrandLogo from "./BrandLogo";
-import CanadaMark from "./CanadaMark";
-import { navItems } from "../data/content";
+import BrandLogo from "../brand/BrandLogo";
+import CanadaMark from "../brand/CanadaMark";
+import { navItems } from "../../data/content";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);

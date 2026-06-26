@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, HandCoins } from "lucide-react";
-import { givingSteps } from "../data/content";
+import { givingSteps } from "../../data/content";
 
 export default function GivingPath() {
   return (

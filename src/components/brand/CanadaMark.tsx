@@ -1,4 +1,4 @@
-import mapleLeaf from "../assets/logos/canada-maple-leaf.png";
+import mapleLeaf from "../../assets/logos/canada-maple-leaf.png";
 
 export default function CanadaMark() {
   return (

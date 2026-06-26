@@ -1,20 +1,20 @@
 import { MotionConfig, motion, useScroll } from "framer-motion";
-import Footer from "./components/Footer";
-import FundraisingProgress from "./components/FundraisingProgress";
-import GivingPath from "./components/GivingPath";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import ImpactGrid from "./components/ImpactGrid";
-import DonatePage from "./components/DonatePage";
-import Partners from "./components/Partners";
-import StoryBand from "./components/StoryBand";
-import Team from "./components/Team";
+import Footer from "./components/layout/Footer";
+import Header from "./components/layout/Header";
+import FundraisingProgress from "./components/sections/FundraisingProgress";
+import GivingPath from "./components/sections/GivingPath";
+import Hero from "./components/sections/Hero";
+import ImpactGrid from "./components/sections/ImpactGrid";
+import Partners from "./components/sections/Partners";
+import StoryBand from "./components/sections/StoryBand";
+import DonatePage from "./pages/DonatePage";
+import Team from "./pages/Team";
 import {
   CommunityTransformationProjectsPage,
   GreenPasturesHospitalPage,
-} from "./components/TravelProjectPages";
-import TravelToNepal from "./components/TravelToNepal";
-import WhatWeDoPage from "./components/WhatWeDoPage";
+} from "./pages/TravelProjectPages";
+import TravelToNepal from "./pages/TravelToNepal";
+import WhatWeDoPage from "./pages/WhatWeDoPage";
 
 function getPage() {
   return window.location.pathname.replace(/\/$/, "");

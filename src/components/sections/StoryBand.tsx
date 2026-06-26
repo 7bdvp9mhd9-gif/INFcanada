@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
-import storyPhoto from "../assets/images/photo-nepal-story-landscape.jpg";
-import MountainSignature from "./MountainSignature";
+import storyPhoto from "../../assets/images/photo-nepal-story-landscape.jpg";
+import MountainSignature from "../brand/MountainSignature";
 
 export default function StoryBand() {
   return (

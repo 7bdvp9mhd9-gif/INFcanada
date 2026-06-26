@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { GraduationCap, HeartPulse, UsersRound } from "lucide-react";
-import healthPhoto from "../assets/images/photo-health-support.jpg";
-import communityPhoto from "../assets/images/photo-community-leadership.jpg";
-import hospitalPhoto from "../assets/images/photo-medical-charity-care.jpg";
-import { impactAreas, type IconMap } from "../data/content";
+import healthPhoto from "../../assets/images/photo-health-support.jpg";
+import communityPhoto from "../../assets/images/photo-community-leadership.jpg";
+import hospitalPhoto from "../../assets/images/photo-medical-charity-care.jpg";
+import { impactAreas, type IconMap } from "../../data/content";
 
 const icons: IconMap = {
   women: GraduationCap,

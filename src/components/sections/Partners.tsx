@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
-import { partners } from "../data/content";
+import { partners } from "../../data/content";
 
 export default function Partners() {
   return (

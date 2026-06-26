@@ -1,6 +1,6 @@
 import { HeartHandshake } from "lucide-react";
-import BrandLogo from "./BrandLogo";
-import CanadaMark from "./CanadaMark";
+import BrandLogo from "../brand/BrandLogo";
+import CanadaMark from "../brand/CanadaMark";
 
 export default function Footer() {
   return (

@@ -1,8 +1,8 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, CirclePlay } from "lucide-react";
-import heroImage from "../assets/images/hero-nepal.jpg";
-import MountainSignature from "./MountainSignature";
-import { heroStats } from "../data/content";
+import heroImage from "../../assets/images/hero-nepal.jpg";
+import MountainSignature from "../brand/MountainSignature";
+import { heroStats } from "../../data/content";
 
 export default function Hero() {
   const { scrollY } = useScroll();
