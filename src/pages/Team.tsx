@@ -1,6 +1,7 @@
 import { ArrowUpRight, HandHeart, Sparkles } from "lucide-react";
 import kamalPhoto from "../assets/images/team-kamal-ghamal.jpg";
 import jenniferPhoto from "../assets/images/team-jennifer-huang.jpeg";
+import arjunPhoto from "../assets/images/team-arjun-pandey.jpeg";
 import davidPhoto from "../assets/images/team-david-stevens.jpg";
 import evelynPhoto from "../assets/images/team-evelyn-villanueva.jpg";
 import { teamMembers, type TeamMember } from "../data/content";
@@ -8,6 +9,7 @@ import { teamMembers, type TeamMember } from "../data/content";
 const teamPhotos = {
   kamal: kamalPhoto,
   jennifer: jenniferPhoto,
+  arjun: arjunPhoto,
   david: davidPhoto,
   evelyn: evelynPhoto,
 } satisfies Record<NonNullable<TeamMember["image"]>, string>;

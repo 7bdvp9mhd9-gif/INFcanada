@@ -33,7 +33,7 @@ export type TeamMember = {
   role: string;
   bio: string;
   initials: string;
-  image?: "kamal" | "jennifer" | "david" | "evelyn";
+  image?: "kamal" | "jennifer" | "arjun" | "david" | "evelyn";
   imageAlt?: string;
 };
 
@@ -56,14 +56,19 @@ export const navItems: NavItem[] = [
   {
     label: "About Us",
     href: "/team",
-    children: [{ label: "Our Team", href: "/team" }],
+    children: [
+      { label: "Vision & Mission", href: "/vision-mission" },
+      { label: "Our Mandate", href: "/our-mandate" },
+      { label: "Core Values", href: "/core-values" },
+      { label: "Our Team", href: "/team" },
+    ],
   },
 ];
 
 export const heroStats = [
   { value: "1952", label: "INF began serving in Nepal" },
   { value: "West Nepal", label: "Focus on remote communities" },
-  { value: "Local first", label: "Led beside Nepali partners" },
+  { value: "Holistic care", label: "Health, inclusion, and community transformation" },
 ];
 
 export const impactAreas: ImpactArea[] = [
@@ -166,5 +171,13 @@ export const teamMembers: TeamMember[] = [
     initials: "EV",
     image: "evelyn",
     imageAlt: "Evelyn Villanueva standing indoors in a red plaid shirt.",
+  },
+  {
+    name: "Arjun Pandey",
+    role: "Director",
+    bio: "Arjun is a construction/project management professional. He is currently living and working in Toronto, Canada. He has worked in United Nations Development Program (UNDP) projects as well as in United Mission to Nepal (UMN) in Nepal for several years in various capacities.",
+    initials: "AP",
+    image: "arjun",
+    imageAlt: "Arjun Pandey wearing a gray polo shirt against a light background.",
   },
 ];

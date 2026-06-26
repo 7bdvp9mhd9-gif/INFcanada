@@ -7,6 +7,7 @@ import Hero from "./components/sections/Hero";
 import ImpactGrid from "./components/sections/ImpactGrid";
 import Partners from "./components/sections/Partners";
 import StoryBand from "./components/sections/StoryBand";
+import AboutInfoPage, { type AboutPageKey } from "./pages/AboutInfoPage";
 import DonatePage from "./pages/DonatePage";
 import Team from "./pages/Team";
 import {
@@ -20,9 +21,26 @@ function getPage() {
   return window.location.pathname.replace(/\/$/, "");
 }
 
+function getAboutPage(page: string): AboutPageKey | null {
+  if (page === "/vision-mission" || page === "/vision-and-mission") {
+    return "vision-mission";
+  }
+
+  if (page === "/our-mandate") {
+    return "our-mandate";
+  }
+
+  if (page === "/core-values") {
+    return "core-values";
+  }
+
+  return null;
+}
+
 export default function App() {
   const { scrollYProgress } = useScroll();
   const page = getPage();
+  const aboutPage = getAboutPage(page);
   const donatePage = page === "/donate";
   const teamPage = page === "/team";
   const travelPage = page === "/travel-to-nepal";
@@ -36,12 +54,14 @@ export default function App() {
       <Header />
       <main
         className={
-          teamPage || travelPage || donatePage || whatWeDoPage || communityProjectsPage || hospitalPage
+          aboutPage || teamPage || travelPage || donatePage || whatWeDoPage || communityProjectsPage || hospitalPage
             ? "page-main"
             : undefined
         }
       >
-        {donatePage ? (
+        {aboutPage ? (
+          <AboutInfoPage page={aboutPage} />
+        ) : donatePage ? (
           <DonatePage />
         ) : whatWeDoPage ? (
           <WhatWeDoPage />
