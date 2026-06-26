@@ -9,6 +9,7 @@ import Partners from "./components/sections/Partners";
 import StoryBand from "./components/sections/StoryBand";
 import AboutInfoPage, { type AboutPageKey } from "./pages/AboutInfoPage";
 import DonatePage from "./pages/DonatePage";
+import OurPurposePage from "./pages/OurPurposePage";
 import Team from "./pages/Team";
 import {
   CommunityTransformationProjectsPage,
@@ -45,6 +46,7 @@ export default function App() {
   const teamPage = page === "/team";
   const travelPage = page === "/travel-to-nepal";
   const whatWeDoPage = page === "/what-we-do" || page === "/what-do-we-do";
+  const ourPurposePage = page === "/our-purpose";
   const communityProjectsPage = page === "/community-transformation-projects" || page === "/transformation";
   const hospitalPage = page === "/inf-green-pastures-hospital" || page === "/hospital";
 
@@ -54,7 +56,14 @@ export default function App() {
       <Header />
       <main
         className={
-          aboutPage || teamPage || travelPage || donatePage || whatWeDoPage || communityProjectsPage || hospitalPage
+          aboutPage ||
+          teamPage ||
+          travelPage ||
+          donatePage ||
+          whatWeDoPage ||
+          ourPurposePage ||
+          communityProjectsPage ||
+          hospitalPage
             ? "page-main"
             : undefined
         }
@@ -65,6 +74,8 @@ export default function App() {
           <DonatePage />
         ) : whatWeDoPage ? (
           <WhatWeDoPage />
+        ) : ourPurposePage ? (
+          <OurPurposePage />
         ) : communityProjectsPage ? (
           <CommunityTransformationProjectsPage />
         ) : hospitalPage ? (
