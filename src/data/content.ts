@@ -22,12 +22,6 @@ export type FundraisingProgress = {
   body: string;
 };
 
-export type Partner = {
-  name: string;
-  location: string;
-  focus: string;
-};
-
 export type TeamMember = {
   name: string;
   role: string;
@@ -121,24 +115,6 @@ export const fundraisingProgress: FundraisingProgress = {
   title: "Climbing toward the first INF Canada goal",
   body: "Every gift moves practical care, rehabilitation, and community resilience closer to people in Nepal who are waiting for support.",
 };
-
-export const partners: Partner[] = [
-  {
-    name: "Local leadership",
-    location: "Community-led priorities",
-    focus: "Support follows local knowledge, relationships, and long-term trust.",
-  },
-  {
-    name: "Transparent giving",
-    location: "Canadian supporters",
-    focus: "Clear updates help donors see how generosity becomes practical care.",
-  },
-  {
-    name: "Shared mission",
-    location: "One INF family",
-    focus: "Health, inclusion, resilience, and dignity stay at the centre of the work.",
-  },
-];
 
 export const teamMembers: TeamMember[] = [
   {

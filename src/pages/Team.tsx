@@ -66,8 +66,8 @@ export default function Team({ isPage = false }: TeamProps) {
               Meet the people helping carry INF Canada's work with practical care,
               faithful stewardship, and long-term relationship.
             </p>
-            <a className="team-link" href="/#partners">
-              <span>See the wider partnership</span>
+            <a className="team-link" href="/#watch">
+              <span>Watch the INF story</span>
               <ArrowUpRight size={18} aria-hidden="true" />
             </a>
           </div>

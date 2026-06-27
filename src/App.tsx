@@ -5,8 +5,8 @@ import FundraisingProgress from "./components/sections/FundraisingProgress";
 import GivingPath from "./components/sections/GivingPath";
 import Hero from "./components/sections/Hero";
 import ImpactGrid from "./components/sections/ImpactGrid";
-import Partners from "./components/sections/Partners";
 import StoryBand from "./components/sections/StoryBand";
+import WeAreInfVideo from "./components/sections/WeAreInfVideo";
 import AboutInfoPage, { type AboutPageKey } from "./pages/AboutInfoPage";
 import DonatePage from "./pages/DonatePage";
 import OurPurposePage from "./pages/OurPurposePage";
@@ -91,7 +91,7 @@ export default function App() {
             <GivingPath />
             <FundraisingProgress />
             <StoryBand />
-            <Partners />
+            <WeAreInfVideo />
           </>
         )}
       </main>
