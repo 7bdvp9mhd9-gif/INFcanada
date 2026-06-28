@@ -288,7 +288,7 @@ export default function OurPurposePage() {
             transition={{ duration: 0.58, ease: [0.22, 1, 0.36, 1] }}
           >
             <p className="eyebrow">Purpose statements</p>
-            <h2 id="purpose-list-title">Clear commitments, kept close to the wording of the source document.</h2>
+            <h2 id="purpose-list-title">Clear commitments for health, dignity and stronger communities in Nepal.</h2>
           </motion.div>
 
           <div className="purpose-band-list">

@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { GraduationCap, HeartPulse, UsersRound } from "lucide-react";
 import healthPhoto from "../../assets/images/photo-health-support.jpg";
 import communityPhoto from "../../assets/images/photo-community-leadership.jpg";
@@ -30,20 +29,14 @@ export default function ImpactGrid() {
   return (
     <section className="section impact-section" id="work" aria-labelledby="work-title">
       <div className="section-inner">
-        <motion.div
-          className="section-heading"
-          initial={{ y: 24 }}
-          whileInView={{ y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="section-heading">
           <p className="eyebrow">Where giving moves first</p>
           <h2 id="work-title">Three projects, one shared purpose.</h2>
           <p>
             INF Canada supports women&apos;s capacity building, community transformation,
             and medical charity care through trusted work in Nepal.
           </p>
-        </motion.div>
+        </div>
 
         <div className="impact-grid">
           {impactAreas.map((area, index) => {
@@ -51,15 +44,11 @@ export default function ImpactGrid() {
             const photo = impactPhotos[area.icon];
 
             return (
-              <motion.a
+              <a
                 className="impact-card"
                 href={area.href}
                 key={area.title}
                 aria-label={`Read more about ${area.title}`}
-                initial={{ y: 34 }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true, amount: 0.45 }}
-                transition={{ duration: 0.55, delay: index * 0.1 }}
               >
                 <div className="impact-photo">
                   <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
@@ -72,7 +61,7 @@ export default function ImpactGrid() {
                   <h3>{area.title}</h3>
                   <p>{area.body}</p>
                 </div>
-              </motion.a>
+              </a>
             );
           })}
         </div>

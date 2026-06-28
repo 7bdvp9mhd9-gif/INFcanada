@@ -3,12 +3,16 @@ import {
   Compass,
   HandHeart,
   HeartHandshake,
+  Landmark,
   Sprout,
   UsersRound,
   type LucideIcon,
 } from "lucide-react";
+import storySlideOne from "../assets/images/inf-story-slides/inf-story-slide-1.jpg";
+import storySlideTwo from "../assets/images/inf-story-slides/inf-story-slide-2.jpg";
+import storySlideThree from "../assets/images/inf-story-slides/inf-story-slide-3.jpg";
 
-export type AboutPageKey = "vision-mission" | "our-mandate" | "core-values";
+export type AboutPageKey = "vision-mission" | "our-mandate" | "core-values" | "inf-history";
 
 type Statement = {
   label: string;
@@ -21,9 +25,13 @@ type AboutPage = {
   title: string;
   intro: string;
   icon: LucideIcon;
-  mode: "statements" | "quote" | "values";
+  mode: "statements" | "quote" | "values" | "history";
   statements: Statement[];
   verseReference?: string;
+  slides?: {
+    src: string;
+    alt: string;
+  }[];
 };
 
 const aboutPages: Record<AboutPageKey, AboutPage> = {
@@ -82,12 +90,35 @@ const aboutPages: Record<AboutPageKey, AboutPage> = {
       },
     ],
   },
+  "inf-history": {
+    eyebrow: "History of INF",
+    title: "INF History",
+    intro: "A short visual history of INF's work in Nepal and the people who helped carry it forward.",
+    icon: Landmark,
+    mode: "history",
+    statements: [],
+    slides: [
+      {
+        src: storySlideOne,
+        alt: "History of INF slide with an archival Nepal river crossing photo and portraits of Lily O'Hanlon and Hilda Steele.",
+      },
+      {
+        src: storySlideTwo,
+        alt: "INF history slide describing the Shining Hospital and the beginning of INF's work in Nepal in 1952.",
+      },
+      {
+        src: storySlideThree,
+        alt: "INF history slide honouring Beth Allinger's years of service with INF in India and Nepal.",
+      },
+    ],
+  },
 };
 
 const relatedLinks: { label: string; href: string }[] = [
   { label: "Vision & Mission", href: "/vision-mission" },
   { label: "Our Mandate", href: "/our-mandate" },
   { label: "Core Values", href: "/core-values" },
+  { label: "INF History", href: "/inf-history" },
   { label: "Our Team", href: "/team" },
 ];
 
@@ -120,6 +151,23 @@ function AboutStatements({ page }: { page: AboutPage }) {
     );
   }
 
+  if (page.mode === "history") {
+    return (
+      <div className="about-history-gallery" aria-label="INF history slides">
+        {page.slides?.map((slide, index) => (
+          <figure className="about-history-slide" key={slide.src}>
+            <img
+              src={slide.src}
+              alt={slide.alt}
+              loading={index === 0 ? "eager" : "lazy"}
+              decoding="async"
+            />
+          </figure>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="about-statement-grid">
       {page.statements.map((statement) => (
@@ -137,8 +185,8 @@ export default function AboutInfoPage({ page: pageKey }: { page: AboutPageKey })
   const Icon = page.icon;
 
   return (
-    <div className="about-info-page">
-      <section className="about-info-shell" aria-labelledby="about-info-title">
+    <div className={`about-info-page about-info-page-${page.mode}`}>
+      <section className={`about-info-shell about-info-shell-${page.mode}`} aria-labelledby="about-info-title">
         <div className="about-info-intro">
           <div className="about-info-mark" aria-hidden="true">
             <Icon size={34} />

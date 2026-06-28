@@ -1,5 +1,3 @@
-import { useRef } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Droplets, Flag, Target, Waves } from "lucide-react";
 import { fundraisingProgress } from "../../data/content";
 
@@ -32,8 +30,6 @@ const mountainRidgePaths = [
 ];
 const liquidBottom = 236;
 const liquidTravel = 184;
-const waveTileWidth = 360;
-const waveDuration = "5.4s";
 const waveSurfacePath =
   "M-720 36C-660 10 -600 62 -540 36S-420 10 -360 36S-240 62 -180 36S-60 10 0 36S120 62 180 36S300 10 360 36S480 62 540 36S660 10 720 36S840 62 900 36S1020 10 1080 36S1200 62 1260 36";
 const waveFoamPath =
@@ -47,18 +43,7 @@ const statItems = [
   { label: "Left to raise", key: "remaining" },
 ] as const;
 
-const bubbles = [
-  { cx: 150, cy: 212, r: 5, delay: 0.1, duration: 4.8 },
-  { cx: 226, cy: 192, r: 3.5, delay: 1.2, duration: 5.4 },
-  { cx: 314, cy: 175, r: 4, delay: 0.6, duration: 4.9 },
-  { cx: 410, cy: 194, r: 3, delay: 1.7, duration: 5.8 },
-  { cx: 498, cy: 218, r: 4.5, delay: 0.9, duration: 5.1 },
-];
-
 export default function FundraisingProgress() {
-  const meterRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
-  const meterInView = useInView(meterRef, { once: true, amount: 0.45 });
   const { goal, raised, isExample } = fundraisingProgress;
   const remaining = Math.max(goal - raised, 0);
   const progressRatio = goal > 0 ? Math.min(raised / goal, 1) : 0;
@@ -76,13 +61,7 @@ export default function FundraisingProgress() {
       aria-labelledby="fundraising-title"
     >
       <div className="section-inner fundraising-shell">
-        <motion.div
-          className="fundraising-copy"
-          initial={{ y: 28, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.65 }}
-        >
+        <div className="fundraising-copy">
           <p className="eyebrow">{statusLabel}</p>
           <h2 id="fundraising-title">{fundraisingProgress.title}</h2>
           <p>{fundraisingProgress.body}</p>
@@ -90,28 +69,18 @@ export default function FundraisingProgress() {
             <Droplets size={18} aria-hidden="true" />
             <span>{note}</span>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="fundraising-panel"
-          initial={{ y: 34, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.28 }}
-          transition={{ duration: 0.75, delay: 0.08 }}
-        >
+        <div className="fundraising-panel">
           <div className="fundraising-stats" aria-label="Fundraising progress values">
-            {statItems.map((item, index) => (
-              <motion.div
+            {statItems.map((item) => (
+              <div
                 className="fundraising-stat"
                 key={item.key}
-                initial={{ y: 16, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true, amount: 0.45 }}
-                transition={{ duration: 0.48, delay: 0.18 + index * 0.08 }}
               >
                 <span>{item.label}</span>
                 <strong>{moneyFormatter.format(statValues[item.key])}</strong>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -129,7 +98,6 @@ export default function FundraisingProgress() {
             </div>
 
             <div
-              ref={meterRef}
               className="liquid-mountain-frame"
               role="img"
               aria-label={`${moneyFormatter.format(raised)} raised toward ${goalDescriptor} ${moneyFormatter.format(goal)} goal, with ${moneyFormatter.format(remaining)} left to raise.`}
@@ -149,26 +117,11 @@ export default function FundraisingProgress() {
                 <path className="liquid-mountain-base" d={mountainPath} />
 
                 <g clipPath="url(#liquid-mountain-clip)">
-                  <motion.g
+                  <g
                     className="liquid-layer"
-                    initial={{ y: liquidBottom }}
-                    animate={{ y: meterInView ? liquidY : liquidBottom }}
-                    transition={{
-                      duration: reduceMotion ? 0 : 1.85,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
+                    transform={`translate(0 ${liquidY})`}
                   >
                     <g className="liquid-wave-set">
-                      {!reduceMotion && (
-                        <animateTransform
-                          attributeName="transform"
-                          dur={waveDuration}
-                          from="0 0"
-                          repeatCount="indefinite"
-                          to={`-${waveTileWidth} 0`}
-                          type="translate"
-                        />
-                      )}
                       <path
                         className="liquid-deep"
                         fill="url(#liquid-mountain-fill)"
@@ -183,34 +136,12 @@ export default function FundraisingProgress() {
                         d={waveFoamSoftPath}
                       />
                     </g>
-                  </motion.g>
-
-                  {!reduceMotion &&
-                    bubbles.map((bubble) => (
-                      <motion.circle
-                        className="liquid-bubble"
-                        key={`${bubble.cx}-${bubble.cy}`}
-                        cx={bubble.cx}
-                        cy={bubble.cy}
-                        r={bubble.r}
-                        animate={{ y: [0, -22, 0], opacity: [0, 0.7, 0] }}
-                        transition={{
-                          duration: bubble.duration,
-                          delay: bubble.delay,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      />
-                    ))}
+                  </g>
                 </g>
 
-                <motion.path
+                <path
                   className="liquid-mountain-outline"
                   d={mountainPath}
-                  initial={{ pathLength: 0, opacity: 0.5 }}
-                  whileInView={{ pathLength: 1, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.52 }}
-                  transition={{ duration: reduceMotion ? 0 : 1.2, delay: 0.18 }}
                 />
                 <path className="liquid-mountain-snow" d={mountainSnowPath} />
                 {mountainRidgePaths.map((path) => (
@@ -218,19 +149,13 @@ export default function FundraisingProgress() {
                 ))}
               </svg>
 
-              <motion.div
-                className="remaining-chip"
-                initial={{ y: 14, opacity: 0, scale: 0.96 }}
-                whileInView={{ y: 0, opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.52 }}
-                transition={{ duration: reduceMotion ? 0 : 0.55, delay: 0.42 }}
-              >
+              <div className="remaining-chip">
                 <span>{moneyFormatter.format(remaining)}</span>
                 <small>{isExample ? "left in this example" : "left to goal"}</small>
-              </motion.div>
+              </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

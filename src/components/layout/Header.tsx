@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, HeartHandshake, Menu, X } from "lucide-react";
+import { ChevronDown, HeartHandshake, Home, Menu, X } from "lucide-react";
 import BrandLogo from "../brand/BrandLogo";
 import CanadaMark from "../brand/CanadaMark";
 import { navItems } from "../../data/content";
@@ -20,15 +20,31 @@ export default function Header() {
         <CanadaMark />
       </a>
 
-      <nav className={isOpen ? "nav nav-open" : "nav"} aria-label="Primary navigation">
+      <nav
+        className={isOpen ? "nav nav-open" : "nav"}
+        id="primary-navigation"
+        aria-label="Primary navigation"
+      >
         {navItems.map((item) =>
           item.children ? (
             <div
               className={openDropdown === item.label ? "nav-item nav-item-open" : "nav-item"}
               key={item.label}
-              onMouseEnter={() => setOpenDropdown(item.label)}
-              onMouseLeave={() => setOpenDropdown(null)}
-              onFocus={() => setOpenDropdown(item.label)}
+              onMouseEnter={() => {
+                if (!isOpen) {
+                  setOpenDropdown(item.label);
+                }
+              }}
+              onMouseLeave={() => {
+                if (!isOpen) {
+                  setOpenDropdown(null);
+                }
+              }}
+              onFocus={() => {
+                if (!isOpen) {
+                  setOpenDropdown(item.label);
+                }
+              }}
               onBlur={(event) => {
                 if (!event.currentTarget.contains(event.relatedTarget)) {
                   setOpenDropdown(null);
@@ -66,7 +82,11 @@ export default function Header() {
         )}
       </nav>
 
-      <a className="header-donate" href="/donate">
+      <a className="header-home" href="/" aria-label="Home" onClick={closeNavigation}>
+        <Home size={18} aria-hidden="true" />
+      </a>
+
+      <a className="header-donate" href="/donate" onClick={closeNavigation}>
         <HeartHandshake size={18} aria-hidden="true" />
         <span>Donate</span>
       </a>
@@ -76,12 +96,14 @@ export default function Header() {
         type="button"
         aria-label={isOpen ? "Close navigation" : "Open navigation"}
         aria-expanded={isOpen}
+        aria-controls="primary-navigation"
         onClick={() => {
           setIsOpen((current) => !current);
           setOpenDropdown(null);
         }}
       >
-        {isOpen ? <X size={22} /> : <Menu size={22} />}
+        {isOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+        <span>{isOpen ? "Close" : "Menu"}</span>
       </button>
     </header>
   );

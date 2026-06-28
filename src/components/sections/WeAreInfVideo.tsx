@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 
 const videoEmbedUrl =
@@ -13,13 +12,7 @@ export default function WeAreInfVideo() {
   return (
     <section className="watch-section" id="watch" aria-labelledby="watch-title">
       <div className="watch-inner">
-        <motion.div
-          className="watch-heading"
-          initial={{ y: 24, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.56, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div className="watch-heading">
           <p className="watch-kicker">Watch</p>
           <div className="watch-title-row">
             <h2 id="watch-title">We Are INF</h2>
@@ -28,15 +21,9 @@ export default function WeAreInfVideo() {
               <Play size={14} fill="currentColor" aria-hidden="true" />
             </button>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="watch-copy-grid"
-          initial={{ y: 24, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.58, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div className="watch-copy-grid">
           <p>
             "We Are INF" introduces the work of INF Canada, a Christian non-governmental
             organization that has been serving Nepal since 1952.
@@ -47,14 +34,10 @@ export default function WeAreInfVideo() {
             life for marginalized and vulnerable communities through sustainable development and
             compassionate care.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
+        <div
           className={`watch-video-frame${isPlaying ? " watch-video-frame-playing" : ""}`}
-          initial={{ y: 32, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.28 }}
-          transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
         >
           {isPlaying ? (
             <iframe
@@ -83,7 +66,7 @@ export default function WeAreInfVideo() {
               </span>
             </button>
           )}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

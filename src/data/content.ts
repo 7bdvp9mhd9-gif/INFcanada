@@ -48,6 +48,7 @@ export const navItems: NavItem[] = [
       { label: "Vision & Mission", href: "/vision-mission" },
       { label: "Our Mandate", href: "/our-mandate" },
       { label: "Core Values", href: "/core-values" },
+      { label: "INF History", href: "/inf-history" },
       { label: "Our Team", href: "/team" },
     ],
   },

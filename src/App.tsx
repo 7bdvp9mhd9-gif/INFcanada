@@ -1,8 +1,7 @@
-import { MotionConfig, motion, useScroll } from "framer-motion";
+import { MotionConfig } from "framer-motion";
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 import FundraisingProgress from "./components/sections/FundraisingProgress";
-import GivingPath from "./components/sections/GivingPath";
 import Hero from "./components/sections/Hero";
 import ImpactGrid from "./components/sections/ImpactGrid";
 import StoryBand from "./components/sections/StoryBand";
@@ -35,11 +34,14 @@ function getAboutPage(page: string): AboutPageKey | null {
     return "core-values";
   }
 
+  if (page === "/inf-history") {
+    return "inf-history";
+  }
+
   return null;
 }
 
 export default function App() {
-  const { scrollYProgress } = useScroll();
   const page = getPage();
   const aboutPage = getAboutPage(page);
   const donatePage = page === "/donate";
@@ -52,7 +54,6 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
       <Header />
       <main
         className={
@@ -88,7 +89,6 @@ export default function App() {
           <>
             <Hero />
             <ImpactGrid />
-            <GivingPath />
             <FundraisingProgress />
             <StoryBand />
             <WeAreInfVideo />

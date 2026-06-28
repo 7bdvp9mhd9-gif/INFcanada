@@ -1,15 +1,13 @@
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  Clock,
   CreditCard,
   ExternalLink,
-  HeartHandshake,
   Landmark,
   Mail,
-  MapPin,
   ReceiptText,
   ShieldCheck,
+  HeartHandshake,
 } from "lucide-react";
 import heroImage from "../assets/images/photo-health-support.jpg";
 
@@ -38,7 +36,7 @@ const donationMethods = [
       { label: "Payable to", value: "INF CANADA" },
       { label: "Receipts", value: "Issued for donations of at least $20" },
     ],
-    address: ["PO Box 91112", "Royal Oak RPO", "Calgary AB T3G 5W6"],
+    address: ["INF Canada PO Box 91112", "Royal Oak RPO", "Calgary AB T3G 5W6"],
     mutedAction: "Mail cheque to the address above",
   },
   {
@@ -95,51 +93,12 @@ export default function DonatePage() {
             <p className="eyebrow">Give with confidence</p>
             <h1 id="donate-title">Donate to INF Canada</h1>
             <div className="donate-actions" aria-label="Donation actions">
-              <a
-                className="button button-primary"
-                href={onlineDonationUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span>Donate online</span>
-                <ExternalLink size={18} aria-hidden="true" />
-              </a>
               <a className="button button-secondary" href="#donation-options">
                 <span>View all options</span>
                 <ArrowRight size={18} aria-hidden="true" />
               </a>
             </div>
           </motion.div>
-
-          <motion.aside
-            className="donate-hero-panel"
-            aria-label="Donation summary"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.12, duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="donate-panel-header">
-              <HeartHandshake size={24} aria-hidden="true" />
-              <div>
-                <span>3 ways to pay</span>
-                <strong>Online, cheque, and e-transfer</strong>
-              </div>
-            </div>
-            <ul className="donate-panel-list">
-              <li>
-                <ShieldCheck size={18} aria-hidden="true" />
-                <span>Secure online donations through CanadaHelps.</span>
-              </li>
-              <li>
-                <MapPin size={18} aria-hidden="true" />
-                <span>Cheque gifts can be mailed to INF CANADA in Calgary.</span>
-              </li>
-              <li>
-                <Clock size={18} aria-hidden="true" />
-                <span>E-transfer details are coming soon.</span>
-              </li>
-            </ul>
-          </motion.aside>
         </div>
       </section>
 
